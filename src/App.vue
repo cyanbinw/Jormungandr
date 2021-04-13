@@ -14,13 +14,13 @@
             <template #title>投资</template>
             <el-menu-item index="2-1-1" @click="goToInvestmentTable()">投资表</el-menu-item>
             <el-menu-item index="2-1-2" @click="goToInvestmentDiagram()">投资资金曲线图</el-menu-item>
-            <el-menu-item index="2-1-3">盈亏</el-menu-item>
+            <el-menu-item index="2-1-3">当前盈亏</el-menu-item>
           </el-submenu>
           <el-submenu index="2-2">
             <template #title>账本</template>
             <el-menu-item index="2-2-1">账本表</el-menu-item>
             <el-menu-item index="2-2-2">各月曲线图</el-menu-item>
-            <el-menu-item index="2-2-3">选项3</el-menu-item>
+            <el-menu-item index="2-2-3">每月简报</el-menu-item>
           </el-submenu>
           <el-menu-item index="2-3">选项3</el-menu-item>
           <el-submenu index="2-4">
