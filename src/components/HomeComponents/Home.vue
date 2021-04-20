@@ -1,7 +1,18 @@
 <template>
-  <InvestmentPieChart :item="InvestmentValue" />
-  <InvestmentHistogram :item="InvestmentValue" />
-  <BillLineChart v-for="(item,index) in BillValue" :key="index" :item="item" :index="index" />
+  <el-row>
+    <el-col :span="24">
+      <InvestmentPieChart :item="InvestmentValue" />
+      <InvestmentHistogram :item="InvestmentValue" />
+    </el-col>
+    <el-col :span="24">
+      <BillLineChart
+        v-for="(item, index) in BillValue"
+        :key="index"
+        :item="item"
+        :index="index"
+      />
+    </el-col>
+  </el-row>
 </template>
 
 <script lang="ts">
@@ -44,7 +55,7 @@ export default defineComponent({
       .post(api.getFourMonthAllData)
       .then((response) => {
         var yearMonth: string = "0";
-        var num: number = 0
+        var num: number = 0;
         response.data.forEach((c) => {
           if (yearMonth == "0") {
             yearMonth =
@@ -57,12 +68,15 @@ export default defineComponent({
               moment(c.Date).format("YYYY") + moment(c.Date).format("MM")
           ) {
             c.Date = moment(c.Date).format("yyyy-MM-DD");
-            if (yearMonth != moment(c.Date).format("YYYY") + moment(c.Date).format("MM")) {
+            if (
+              yearMonth !=
+              moment(c.Date).format("YYYY") + moment(c.Date).format("MM")
+            ) {
               (this.BillValue[num] as any[]) = [];
             }
             (this.BillValue[num] as any[]).push(c);
           } else {
-            num ++
+            num++;
             yearMonth =
               moment(c.Date).format("YYYY") + moment(c.Date).format("MM");
             c.Date = moment(c.Date).format("yyyy-MM-DD");
@@ -73,7 +87,7 @@ export default defineComponent({
           }
         });
         this.BillValue;
-        console.log(this.BillValue)
+        console.log(this.BillValue);
       })
       .catch((error) => {
         console.log(error);
