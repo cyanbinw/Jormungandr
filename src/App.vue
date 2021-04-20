@@ -18,9 +18,10 @@
           </el-submenu>
           <el-submenu index="2-2">
             <template #title>账本</template>
-            <el-menu-item index="2-2-1">账本表</el-menu-item>
-            <el-menu-item index="2-2-2">各月曲线图</el-menu-item>
-            <el-menu-item index="2-2-3">每月简报</el-menu-item>
+            <el-menu-item index="2-2-1">预算与开支</el-menu-item>
+            <el-menu-item index="2-2-2">账本表</el-menu-item>
+            <el-menu-item index="2-2-3">各月曲线图</el-menu-item>
+            <el-menu-item index="2-2-4">每月简报</el-menu-item>
           </el-submenu>
           <el-menu-item index="2-3">选项3</el-menu-item>
           <el-submenu index="2-4">
@@ -55,10 +56,10 @@ export default defineComponent({
       router.push({path: 'Home'})
     },
     goToInvestmentTable(){
-      router.push({path: 'InvestmentTable'})
+      router.push({path: '/Investment/InvestmentTable'})
     },
     goToInvestmentDiagram(){
-      router.push({path: 'InvestmentDiagram'})
+      router.push({path: '/Bill/InvestmentDiagram'})
     },
   }
 });

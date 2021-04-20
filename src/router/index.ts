@@ -1,15 +1,22 @@
-import { createRouter, createWebHashHistory }  from 'vue-router'
-import Home from '../components/HomeComponents/Home.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import About from '../components/About.vue'
-import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.vue'
+import Home from '../components/HomeComponents/Home.vue'
 import InvestmentDiagram from '../components/InvestmentComponents/InvestmentDiagram.vue'
+import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.vue'
+import PastPresentFuture from '../components/InvestmentComponents/PastPresentFuture.vue'
+import BudgetExpenditure from '../components/Bill/BudgetExpenditure.vue'
 
 const routes = [
     { path: '/', component: Home },
     { path: '/Home', component: Home },
     { path: '/About', component: About },
-    { path: '/InvestmentTable', component: InvestmentTable },
-    { path: '/InvestmentDiagram', component: InvestmentDiagram },
+    //Investment
+    { path: '/Investment/InvestmentTable', component: InvestmentTable },
+    { path: '/Investment/InvestmentDiagram', component: InvestmentDiagram },
+    { path: '/Investment/InvestmentDiagram', component: PastPresentFuture },
+
+    //Bill
+    { path: '/Bill/BudgetExpenditure', component: BudgetExpenditure },
   ]
   
   // 3. 创建路由实例并传递 `routes` 配置
