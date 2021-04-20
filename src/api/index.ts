@@ -2,6 +2,7 @@
 
 export class WebAddress {
     address: string = 'http://localhost:8080'
+    // address: string = 'http://192.168.2.213:8080'
 
     public getYearAllData = this.address + '/v1/GetYearAllData'
 
