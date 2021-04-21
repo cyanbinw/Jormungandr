@@ -6,6 +6,7 @@ import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.
 import PastPresentFuture from '../components/InvestmentComponents/PastPresentFuture.vue'
 import BudgetExpenditure from '../components/Bill/BudgetExpenditure.vue'
 import BillTable from '../components/Bill/BillTable.vue'
+import DesireTable from '../components/Desire/DesireTable.vue'
 
 const routes = [
     { path: '/', component: Home },
@@ -19,6 +20,9 @@ const routes = [
     //Bill
     { path: '/Bill/BudgetExpenditure', component: BudgetExpenditure },
     { path: '/Bill/BillTable', component: BillTable },
+    
+    //Desire
+    { path: '/Desire/DesireTable', component: DesireTable },
   ]
   
   // 3. 创建路由实例并传递 `routes` 配置
