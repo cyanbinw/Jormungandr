@@ -14,7 +14,7 @@
             <template #title>投资</template>
             <el-menu-item index="2-1-1" @click="goToInvestmentTable()">投资表</el-menu-item>
             <el-menu-item index="2-1-2" @click="goToInvestmentDiagram()">投资资金曲线图</el-menu-item>
-            <el-menu-item index="2-1-3" @click="goToPastPresentFuture()">昨天今天明天</el-menu-item>
+            <el-menu-item index="2-1-3" @click="goToTarget()">愿望</el-menu-item>
           </el-submenu>
           <el-submenu index="2-2">
             <template #title>账本</template>
@@ -53,7 +53,7 @@ export default defineComponent({
   name: "App",
   methods: {
     goToHome(){
-      router.push({path: 'Home'})
+      router.push({path: '/Home'})
     },
     goToInvestmentTable(){
       router.push({path: '/Investment/InvestmentTable'})
@@ -61,8 +61,8 @@ export default defineComponent({
     goToInvestmentDiagram(){
       router.push({path: '/Investment/InvestmentDiagram'})
     },
-    goToPastPresentFuture(){
-      router.push({path: '/Investment/PastPresentFuture'})
+    goToTarget(){
+      router.push({path: '/Target/TargetData'})
     },
     goToBudgetExpenditure(){
       router.push({path: '/Bill/BudgetExpenditure'})

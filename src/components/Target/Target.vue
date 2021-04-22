@@ -73,16 +73,16 @@ export default defineComponent({
     RefreshTarget() {},
   },
   mounted() {
-    // this.axios
-    //   .post(api.getInvestmentDiagram)
-    //   .then((response) => {
-    //     // 指定图表的配置项和数据
-    //     this.tableData = response.data.data;
-    //     this.$forceUpdate();
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    this.axios
+      .post(api.getTarget)
+      .then((response) => {
+        // 指定图表的配置项和数据
+        this.tableData = response.data.data;
+        this.$forceUpdate();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 });
 </script>
