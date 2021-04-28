@@ -51,6 +51,75 @@
       </el-collapse>
     </el-col>
   </el-row>
+
+  <el-dialog :title="dataTitle" v-model="dialogFormVisible">
+    <el-form :model="form">
+      <el-row>
+        <el-col :span="6"> 5年目标: </el-col>
+        <el-col :span="6">
+          <el-input placeholder="Target" v-model="TargetData.Target" clearable>
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="2"> 收入: </el-col>
+        <el-col :span="2">
+          <el-input placeholder="Revenue" v-model="TargetData.Revenue" clearable>
+          </el-input
+        ></el-col>
+        <el-col :span="2"> 资产: </el-col>
+        <el-col :span="18">
+          <el-input
+            placeholder="AssetsData"
+            v-model="TargetData.AssetsData"
+            clearable
+          >
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="2"> 支出: </el-col>
+        <el-col :span="2">
+          <el-input placeholder="Expend" v-model="TargetData.Expend" clearable>
+          </el-input>
+        </el-col>
+        <el-col :span="2"> 负债: </el-col>
+        <el-col :span="18">
+          <el-input
+            placeholder="LiabilitiesData"
+            v-model="TargetData.LiabilitiesData"
+            clearable
+          >
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="6"> 技能: </el-col>
+        <el-col :span="6">
+          <el-input placeholder="Skill" v-model="TargetData.Skill" clearable>
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12"> 收入: </el-col>
+        <el-col :span="12">
+          <el-input placeholder="Other" v-model="TargetData.Other" clearable>
+          </el-input>
+        </el-col>
+      </el-row>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="Cancel()">取 消</el-button>
+        <el-button v-if="addOrUpdate" type="primary" @click="Add()"
+          >确 定</el-button
+        >
+        <el-button v-if="!addOrUpdate" type="primary" @click="Edit()"
+          >确 定</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts">
@@ -63,14 +132,26 @@ export default defineComponent({
   data() {
     return {
       tableData: [],
-      activeName: '1',
+      activeName: "1",
       TargetData: new TargetData(),
+      dialogFormVisible: false,
     };
   },
   methods: {
-    AddTarget() {},
+    AddTarget() {
+      this.dialogFormVisible = true;
+    },
     UpdateTarget() {},
     RefreshTarget() {},
+    Add() {
+      
+    },
+    Edit() {
+      
+    },
+    Cancel() {
+      this.dialogFormVisible = false;
+    },
   },
   mounted() {
     this.axios
