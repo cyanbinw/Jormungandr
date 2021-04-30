@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import About from '../components/About.vue'
 import Home from '../components/HomeComponents/Home.vue'
+import Investment from '../components/InvestmentComponents/Investment.vue'
 import InvestmentDiagram from '../components/InvestmentComponents/InvestmentDiagram.vue'
 import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.vue'
 import Target from '../components/Target/Target.vue'
@@ -14,10 +15,10 @@ const routes = [
   { path: '/About', component: About },
   //Investment
   {
-    path: '/Investment', component: InvestmentTable,
+    path: '/Investment', component: Investment,
     children: [
-      { path: 'InvestmentTable', component: InvestmentTable },
       { path: 'InvestmentDiagram', component: InvestmentDiagram },
+      { path: 'InvestmentTable', component: InvestmentTable },     
     ]
   },
 
