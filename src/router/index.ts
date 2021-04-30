@@ -5,8 +5,11 @@ import Investment from '../components/InvestmentComponents/Investment.vue'
 import InvestmentDiagram from '../components/InvestmentComponents/InvestmentDiagram.vue'
 import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.vue'
 import Target from '../components/Target/Target.vue'
+import TargetData from '../components/Target/TargetData.vue'
 import BudgetExpenditure from '../components/Bill/BudgetExpenditure.vue'
+import Bill from '../components/Bill/Bill.vue'
 import BillTable from '../components/Bill/BillTable.vue'
+import Desire from '../components/Desire/Desire.vue'
 import DesireTable from '../components/Desire/DesireTable.vue'
 
 const routes = [
@@ -24,7 +27,7 @@ const routes = [
 
   //Bill
   {
-    path: '/Bill', component: BudgetExpenditure,
+    path: '/Bill', component: Bill,
     children: [
       { path: 'BudgetExpenditure', component: BudgetExpenditure },
       { path: 'BillTable', component: BillTable },
@@ -34,7 +37,7 @@ const routes = [
 
   //Desire
   {
-    path: '/Desire', component: DesireTable,
+    path: '/Desire', component: Desire,
     children: [
       { path: 'DesireTable', component: DesireTable }
     ]
@@ -44,7 +47,7 @@ const routes = [
   {
     path: '/Target', component: Target,
     children: [
-      { path: 'TargetData', component: Target }
+      { path: 'TargetData', component: TargetData }
     ]
   },
 ]
