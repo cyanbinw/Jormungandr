@@ -87,7 +87,6 @@ export default defineComponent({
           }
         });
         this.BillValue;
-        console.log(this.BillValue);
       })
       .catch((error) => {
         console.log(error);
