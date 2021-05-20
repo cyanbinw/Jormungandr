@@ -2,7 +2,7 @@
   <el-row>
     <el-col :span="24">
       <InvestmentPieChart :item="InvestmentValue" />
-      <InvestmentHistogram :item="InvestmentValue" />
+      <!-- <InvestmentHistogram :item="InvestmentValue" /> -->
     </el-col>
     <el-col :span="24">
       <BillLineChart
