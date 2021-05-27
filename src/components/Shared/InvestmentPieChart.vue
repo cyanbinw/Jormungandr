@@ -1,5 +1,5 @@
 <template>
-  <div id="InvestmentPieChart" style="width: 1000px; height: 800px;float:left;"></div>
+  <div id="InvestmentPieChart" style="width: 100%; height: 800px;float:left;"></div>
 </template>
 
 <script lang="ts">
