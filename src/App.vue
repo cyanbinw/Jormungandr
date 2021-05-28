@@ -13,10 +13,10 @@
           <el-submenu index="2-1">
             <template #title>投资</template>
             <el-menu-item index="2-1-1" @click="goToInvestmentTable()">投资表</el-menu-item>
-            <el-menu-item index="2-1-2" @click="goToInvestmentDiagram()">投资资金曲线图</el-menu-item>
-            <el-menu-item index="2-1-3" @click="goToTarget()">愿望</el-menu-item>
+            <!-- <el-menu-item index="2-1-2" @click="goToInvestmentDiagram()">投资资金曲线图</el-menu-item>
+            <el-menu-item index="2-1-3" @click="goToTarget()">愿望</el-menu-item> -->
           </el-submenu>
-          <el-submenu index="2-2">
+          <!-- <el-submenu index="2-2">
             <template #title>账本</template>
             <el-menu-item index="2-2-1" @click="goToBudgetExpenditure()">预算与开支</el-menu-item>
             <el-menu-item index="2-2-2">账本表</el-menu-item>
@@ -34,7 +34,7 @@
         <el-menu-item index="3" disabled>消息中心</el-menu-item>
         <el-menu-item index="4"
           ><a href="#" target="_blank">内容管理</a></el-menu-item
-        >
+        > -->
       </el-menu>
       <div class="line"></div>
     </el-header>
