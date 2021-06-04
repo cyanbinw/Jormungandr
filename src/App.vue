@@ -29,9 +29,9 @@
             <el-menu-item index="2-4-1">选项1</el-menu-item>
             <el-menu-item index="2-4-2">选项2</el-menu-item>
             <el-menu-item index="2-4-3">选项3</el-menu-item>
-          </el-submenu>
+          </el-submenu> -->
         </el-submenu>
-        <el-menu-item index="3" disabled>消息中心</el-menu-item>
+        <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item>
         <el-menu-item index="4"
           ><a href="#" target="_blank">内容管理</a></el-menu-item
         > -->
