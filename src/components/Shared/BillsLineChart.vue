@@ -27,7 +27,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.item);
     var i = new BillModel();
     i.showBillLineChart(this.item, this.index);
   },

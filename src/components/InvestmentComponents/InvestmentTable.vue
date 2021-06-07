@@ -45,7 +45,22 @@
     <el-form :model="form">
       <el-row>
         <el-col :span="12">
-          <el-input placeholder="Name" v-model="investmentData.name" clearable>
+          <el-input
+            placeholder="Name"
+            v-model="investmentData.name"
+            class="input-with-select"
+          >
+            <template #prepend>
+              <el-select style="width:180px;" v-model="investmentData.itemID" @change="SelectName(investmentData.itemID)" placeholder="现有选择">
+                <el-option
+                  v-for="item in itemList"
+                  :key="item.ItemID"
+                  :label="item.Name"
+                  :value="item.ItemID"
+                >
+                </el-option>
+              </el-select>
+            </template>
           </el-input>
         </el-col>
       </el-row>
@@ -148,6 +163,7 @@ export default defineComponent({
       dataTitle: "",
       addOrUpdate: true,
       showTable: true,
+      itemList: [] as [],
     };
   },
   setup() {},
@@ -161,6 +177,7 @@ export default defineComponent({
     },
     InvestmentOpenAdd() {
       this.dataTitle = "添加";
+      this.investmentData = new InvestmentData();
       this.dialogFormVisible = true;
       this.addOrUpdate = true;
     },
@@ -200,6 +217,10 @@ export default defineComponent({
     },
     InvestmentCancel() {
       this.dialogFormVisible = false;
+    },
+    SelectName(id: number) {
+      var i = this.investmentData
+      i.name = (this.itemList.find( (c:any) => c.ItemID == id) as any).Name
     },
     formatter(row, column) {
       return row.address;
@@ -250,9 +271,9 @@ export default defineComponent({
       .post(api.getInvestmentOption)
       .then((response) => {
         // 指定图表的配置项和数据
-        this.typeList = response.data.type
-        this.activityList = response.data.activity
-
+        this.typeList = response.data.type;
+        this.activityList = response.data.activity;
+        this.itemList = response.data.item;
         this.$forceUpdate();
       })
       .catch((error) => {
