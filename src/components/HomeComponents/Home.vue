@@ -52,7 +52,7 @@ export default defineComponent({
         console.log(error);
       });
     this.axios
-      .post(api.getFourMonthAllData)
+      .post(api.getBillsDataByMonth)
       .then((response) => {
         var yearMonth: string = "0";
         var num: number = 0;

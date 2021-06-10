@@ -6,7 +6,9 @@ export class WebAddress {
 
     public getYearAllData = this.address + '/v1/Bill/GetYearAllData'
 
-    public getFourMonthAllData = this.address + '/v1/Bill/GetFourMonthAllData'
+    public getBillsDataByMonth = this.address + '/v1/Bill/GetDataByMonth'
+
+    public getBillsAllData = this.address + '/v1/Bill/GetAllData'
 
     public getInvestments = this.address + '/v1/Investment/GetInvestments'
 

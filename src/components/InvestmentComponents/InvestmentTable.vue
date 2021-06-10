@@ -5,41 +5,48 @@
       <el-button @click="RefreshTable()">刷新</el-button>
     </el-col>
   </el-row>
-  <el-row>
-    <el-col :span="24" v-if="showTable" style="background-color: white">
-      <el-skeleton animated style="margin: 10px; width: 95%"
-    /></el-col>
-    <el-col :span="24" v-if="!showTable"
-      ><el-table
-        v-loading="showTable"
-        :data="tableData"
-        style="width: 100%"
-        :default-sort="{ prop: 'Date', order: 'descending' }"
-        height="700"
-        highlight-current-row
+  <div style="padding: 24px; background-color: white; border-radius: 15px">
+    <el-row>
+      <el-col
+        :span="24"
+        v-if="showTable"
+        style="background-color: white; padding: 0px"
       >
-        <el-table-column sortable prop="Name" label="Name"> </el-table-column>
-        <el-table-column sortable prop="Account" label="Account">
-        </el-table-column>
-        <el-table-column sortable prop="Share" label="Share"> </el-table-column>
-        <el-table-column sortable prop="NetWorth" label="NetWorth">
-        </el-table-column>
-        <el-table-column sortable prop="Date" label="Date"> </el-table-column>
-        <el-table-column prop="TypeName" label="Type"> </el-table-column>
-        <el-table-column prop="ActivityName" label="ActivityStatus">
-        </el-table-column>
-        <el-table-column label="操作">
-          <template #default="scope">
-            <el-button
-              size="mini"
-              @click="InvestmentOpenEdit(scope.$index, scope.row)"
-              >编辑</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table></el-col
-    >
-  </el-row>
+        <el-skeleton animated style="margin: 10px; width: 95%"
+      /></el-col>
+      <el-col :span="24" v-if="!showTable" style="padding: 0px"
+        ><el-table
+          v-loading="showTable"
+          :data="tableData"
+          style="width: 100%"
+          :default-sort="{ prop: 'Date', order: 'descending' }"
+          height="700"
+          highlight-current-row
+        >
+          <el-table-column sortable prop="Name" label="Name"> </el-table-column>
+          <el-table-column sortable prop="Account" label="Account">
+          </el-table-column>
+          <el-table-column sortable prop="Share" label="Share">
+          </el-table-column>
+          <el-table-column sortable prop="NetWorth" label="NetWorth">
+          </el-table-column>
+          <el-table-column sortable prop="Date" label="Date"> </el-table-column>
+          <el-table-column prop="TypeName" label="Type"> </el-table-column>
+          <el-table-column prop="ActivityName" label="ActivityStatus">
+          </el-table-column>
+          <el-table-column label="操作">
+            <template #default="scope">
+              <el-button
+                size="mini"
+                @click="InvestmentOpenEdit(scope.$index, scope.row)"
+                >编辑</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table></el-col
+      >
+    </el-row>
+  </div>
 
   <el-dialog :title="dataTitle" v-model="dialogFormVisible">
     <el-form :model="form">
@@ -51,7 +58,12 @@
             class="input-with-select"
           >
             <template #prepend>
-              <el-select style="width:180px;" v-model="investmentData.itemID" @change="SelectName(investmentData.itemID)" placeholder="现有选择">
+              <el-select
+                style="width: 180px"
+                v-model="investmentData.itemID"
+                @change="SelectName(investmentData.itemID)"
+                placeholder="现有选择"
+              >
                 <el-option
                   v-for="item in itemList"
                   :key="item.ItemID"
@@ -219,8 +231,8 @@ export default defineComponent({
       this.dialogFormVisible = false;
     },
     SelectName(id: number) {
-      var i = this.investmentData
-      i.name = (this.itemList.find( (c:any) => c.ItemID == id) as any).Name
+      var i = this.investmentData;
+      i.name = (this.itemList.find((c: any) => c.ItemID == id) as any).Name;
     },
     formatter(row, column) {
       return row.address;
