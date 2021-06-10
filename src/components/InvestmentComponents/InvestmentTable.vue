@@ -20,7 +20,7 @@
           :data="tableData"
           style="width: 100%"
           :default-sort="{ prop: 'Date', order: 'descending' }"
-          height="700"
+          :height="tableHeight"
           highlight-current-row
         >
           <el-table-column sortable prop="Name" label="Name"> </el-table-column>
@@ -176,6 +176,7 @@ export default defineComponent({
       addOrUpdate: true,
       showTable: true,
       itemList: [] as [],
+      tableHeight: 0,
     };
   },
   setup() {},
@@ -251,6 +252,8 @@ export default defineComponent({
           });
 
           this.showTable = false;
+          var num = document.getElementById('table')?.clientHeight        
+          this.tableHeight = Number(num) - 48;
           this.$forceUpdate();
         })
         .catch((error) => {
@@ -273,6 +276,8 @@ export default defineComponent({
         });
 
         this.showTable = false;
+        var num = document.getElementById('table')?.clientHeight        
+        this.tableHeight = Number(num) - 48;
         this.$forceUpdate();
       })
       .catch((error) => {

@@ -4,7 +4,7 @@
       <el-button @click="RefreshTable()">刷新</el-button>
     </el-col>
   </el-row>
-  <div style="padding: 24px;background-color: white;border-radius: 15px;">
+  <div id="table" style="padding: 24px;background-color: white;border-radius: 15px;position: absolute;width:94%;height:75%;">
     <el-row>
       <el-col :span="24" v-if="showTable" style="background-color: white;padding: 0px;">
         <el-skeleton animated style="margin: 10px; width: 95%"
@@ -15,6 +15,7 @@
           :data="tableData"
           style="width: 100%"
           :default-sort="{ prop: 'Date', order: 'descending' }"
+          :height="tableHeight"
           highlight-current-row
         >
           <el-table-column sortable prop="BillNumber" label="BillNumber">
@@ -36,6 +37,7 @@
 </template>
 
 <script lang="ts">
+import { number } from "echarts";
 import { defineComponent } from "vue";
 import api from "../../api/index";
 import BillTableData from "../../service/BillTableData";
@@ -53,6 +55,7 @@ export default defineComponent({
       addOrUpdate: true,
       showTable: true,
       itemList: [] as [],
+      tableHeight: 0,
     };
   },
   setup() {},
@@ -72,6 +75,8 @@ export default defineComponent({
           });
 
           this.showTable = false;
+          var num = document.getElementById('table')?.clientHeight        
+          this.tableHeight = Number(num) - 48;
           this.$forceUpdate();
         })
         .catch((error) => {
@@ -92,6 +97,8 @@ export default defineComponent({
         });
 
         this.showTable = false;
+        var num = document.getElementById('table')?.clientHeight        
+        this.tableHeight = Number(num) - 48;
         this.$forceUpdate();
       })
       .catch((error) => {
