@@ -5,16 +5,19 @@
       <el-button @click="RefreshTable()">刷新</el-button>
     </el-col>
   </el-row>
-  <div style="padding: 24px; background-color: white; border-radius: 15px">
+  <div
+    id="table"
+    style="
+      padding: 24px;
+      background-color: white;
+      border-radius: 15px;
+      position: absolute;
+      width: 94%;
+      height: 75%;
+    "
+  >
     <el-row>
-      <el-col
-        :span="24"
-        v-if="showTable"
-        style="background-color: white; padding: 0px"
-      >
-        <el-skeleton animated style="margin: 10px; width: 95%"
-      /></el-col>
-      <el-col :span="24" v-if="!showTable" style="padding: 0px"
+      <el-col :span="24" style="padding: 0px"
         ><el-table
           v-loading="showTable"
           :data="tableData"
@@ -239,6 +242,12 @@ export default defineComponent({
       return row.address;
     },
     RefreshTable() {
+      this.GetData();
+    },
+    Refresh() {
+      this.$forceUpdate();
+    },
+    GetData() {
       this.showTable = true;
       this.axios
         .post(api.getInvestmentsTable)
@@ -252,7 +261,7 @@ export default defineComponent({
           });
 
           this.showTable = false;
-          var num = document.getElementById('table')?.clientHeight        
+          var num = document.getElementById("table")?.clientHeight;
           this.tableHeight = Number(num) - 48;
           this.$forceUpdate();
         })
@@ -260,29 +269,9 @@ export default defineComponent({
           console.log(error);
         });
     },
-    Refresh() {
-      this.$forceUpdate();
-    },
   },
   mounted() {
-    this.axios
-      .post(api.getInvestmentsTable)
-      .then((response) => {
-        // 指定图表的配置项和数据
-        response.data.forEach((c) => {
-          (this.tableData as InvestmentTableData[]).push(
-            new InvestmentTableData(c)
-          );
-        });
-
-        this.showTable = false;
-        var num = document.getElementById('table')?.clientHeight        
-        this.tableHeight = Number(num) - 48;
-        this.$forceUpdate();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.GetData();
 
     this.axios
       .post(api.getInvestmentOption)
@@ -291,7 +280,6 @@ export default defineComponent({
         this.typeList = response.data.type;
         this.activityList = response.data.activity;
         this.itemList = response.data.item;
-        this.$forceUpdate();
       })
       .catch((error) => {
         console.log(error);

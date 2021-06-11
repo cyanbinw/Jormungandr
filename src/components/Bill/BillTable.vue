@@ -4,12 +4,19 @@
       <el-button @click="RefreshTable()">刷新</el-button>
     </el-col>
   </el-row>
-  <div id="table" style="padding: 24px;background-color: white;border-radius: 15px;position: absolute;width:94%;height:75%;">
+  <div
+    id="table"
+    style="
+      padding: 24px;
+      background-color: white;
+      border-radius: 15px;
+      position: absolute;
+      width: 94%;
+      height: 75%;
+    "
+  >
     <el-row>
-      <el-col :span="24" v-if="showTable" style="background-color: white;padding: 0px;">
-        <el-skeleton animated style="margin: 10px; width: 95%"
-      /></el-col>
-      <el-col :span="24" v-if="!showTable" style="padding: 0px;"
+      <el-col :span="24" style="padding: 0px"
         ><el-table
           v-loading="showTable"
           :data="tableData"
@@ -32,6 +39,18 @@
           <el-table-column prop="Remarks" label="Remarks">
           </el-table-column> </el-table
       ></el-col>
+      <el-col>
+        <el-pagination
+          @size-change="SizeChange"
+          @current-change="CurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -56,6 +75,9 @@ export default defineComponent({
       showTable: true,
       itemList: [] as [],
       tableHeight: 0,
+      pageSize: 100,
+      total: 0,
+      currentPage: 1,
     };
   },
   setup() {},
@@ -64,46 +86,57 @@ export default defineComponent({
       return row.address;
     },
     RefreshTable() {
+      var data = {
+        PageSize: this.pageSize,
+        PageNumber: this.currentPage,
+      };
+      this.GetData(data);
+    },
+    Refresh() {
+      this.$forceUpdate();
+    },
+    SizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    CurrentChange(val) {
+      var data = {
+        PageSize: this.pageSize,
+        PageNumber: val,
+      };
+      this.GetData(data);
+    },
+
+    GetData(data: any) {
       this.showTable = true;
+
       this.axios
-        .post(api.getBillsAllData)
+        .post(api.getBillsTable, data)
         .then((response) => {
           // 指定图表的配置项和数据
           this.tableData = [];
-          response.data.forEach((c) => {
+          response.data.BillDetail.forEach((c) => {
             (this.tableData as BillTableData[]).push(new BillTableData(c));
           });
 
+          this.total = response.data.Total;
+
           this.showTable = false;
-          var num = document.getElementById('table')?.clientHeight        
-          this.tableHeight = Number(num) - 48;
+          var num = document.getElementById("table")?.clientHeight;
+          this.tableHeight = Number(num) - 60;
           this.$forceUpdate();
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    Refresh() {
-      this.$forceUpdate();
-    },
   },
   mounted() {
-    this.axios
-      .post(api.getBillsAllData)
-      .then((response) => {
-        // 指定图表的配置项和数据
-        response.data.forEach((c) => {
-          (this.tableData as BillTableData[]).push(new BillTableData(c));
-        });
+    var data = {
+      PageSize: this.pageSize,
+      PageNumber: 1,
+    };
 
-        this.showTable = false;
-        var num = document.getElementById('table')?.clientHeight        
-        this.tableHeight = Number(num) - 48;
-        this.$forceUpdate();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.GetData(data);
   },
 });
 </script>
