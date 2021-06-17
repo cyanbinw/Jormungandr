@@ -1,7 +1,60 @@
 <template>
   <el-row>
-    <el-col :span="24">
+    <el-col :span="3">
+      <el-select
+        v-model="value"
+        multiple
+        collapse-tags
+        style="margin-left: 20px"
+        placeholder="Type"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="3">
+      <el-input v-model="input" placeholder="AccountMin"></el-input>
+    </el-col>
+    <el-col :span="4">
+      <el-date-picker v-model="value1" type="date" placeholder="DateMin">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="4">
       <el-button @click="RefreshTable()">刷新</el-button>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="3">
+      <el-select
+        v-model="value"
+        multiple
+        collapse-tags
+        style="margin-left: 20px"
+        placeholder="BillName"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="3">
+      <el-input v-model="input" placeholder="AccountMax"></el-input>
+    </el-col>
+    <el-col :span="4">
+      <el-date-picker v-model="value1" type="date" placeholder="DateMax">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="4">
+      <el-button @click="RefreshTable()">查询</el-button>
     </el-col>
   </el-row>
   <div
