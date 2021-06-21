@@ -1,6 +1,5 @@
 import * as echarts from "echarts";
 import moment from "moment"
-import { stringifyQuery } from "vue-router";
 
 export default class BillModel {
 
@@ -43,5 +42,23 @@ export default class BillModel {
         type: 'line'
       }]
     });
+  }
+}
+
+export class BillOption {
+  public billName!: string[];
+  public billType!: string[];
+  public accountMax!: number;
+  public accountMin!: number;
+  public dateMax!: Date;
+  public dateMin!: Date;
+
+  add(data: any) {
+    this.billName = data.billName;
+    this.billType = data.billType;
+    this.accountMax = Number(data.accountMax)
+    this.accountMin = Number(data.accountMin)
+    this.dateMax = new Date(data.dateMax)
+    this.dateMin = new Date(data.dateMin)
   }
 }

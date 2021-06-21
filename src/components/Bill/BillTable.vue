@@ -2,26 +2,33 @@
   <el-row>
     <el-col :span="3">
       <el-select
-        v-model="value"
+        v-model="billOption.type"
         multiple
         collapse-tags
         style="margin-left: 20px"
         placeholder="Type"
       >
         <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item in typeList"
+          :key="item"
+          :label="item"
+          :value="item"
         >
         </el-option>
       </el-select>
     </el-col>
     <el-col :span="3">
-      <el-input v-model="input" placeholder="AccountMin"></el-input>
+      <el-input
+        v-model="billOption.accountMin"
+        placeholder="AccountMin"
+      ></el-input>
     </el-col>
     <el-col :span="4">
-      <el-date-picker v-model="value1" type="date" placeholder="DateMin">
+      <el-date-picker
+        v-model="billOption.dateMin"
+        type="date"
+        placeholder="DateMin"
+      >
       </el-date-picker>
     </el-col>
     <el-col :span="4">
@@ -31,30 +38,37 @@
   <el-row>
     <el-col :span="3">
       <el-select
-        v-model="value"
+        v-model="billOption.billName"
         multiple
         collapse-tags
         style="margin-left: 20px"
-        placeholder="BillName"
+        placeholder="billName"
       >
         <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item in billNameList"
+          :key="item"
+          :label="item"
+          :value="item"
         >
         </el-option>
       </el-select>
     </el-col>
     <el-col :span="3">
-      <el-input v-model="input" placeholder="AccountMax"></el-input>
+      <el-input
+        v-model="billOption.accountMax"
+        placeholder="AccountMax"
+      ></el-input>
     </el-col>
     <el-col :span="4">
-      <el-date-picker v-model="value1" type="date" placeholder="DateMax">
+      <el-date-picker
+        v-model="billOption.dateMax"
+        type="date"
+        placeholder="DateMax"
+      >
       </el-date-picker>
     </el-col>
     <el-col :span="4">
-      <el-button @click="RefreshTable()">查询</el-button>
+      <el-button @click="SelectTable()">查询</el-button>
     </el-col>
   </el-row>
   <div
@@ -109,9 +123,10 @@
 </template>
 
 <script lang="ts">
-import { number } from "echarts";
+import moment from "moment";
 import { defineComponent } from "vue";
 import api from "../../api/index";
+import { BillOption } from "../../service/BillModel";
 import BillTableData from "../../service/BillTableData";
 
 const tableData: BillTableData[] = [];
@@ -121,12 +136,12 @@ export default defineComponent({
     return {
       tableData: [],
       typeList: [],
-      activityList: [],
+      billNameList: [],
+      billOption: new BillOption(),
       dialogFormVisible: false,
       dataTitle: "",
       addOrUpdate: true,
       showTable: true,
-      itemList: [] as [],
       tableHeight: 0,
       pageSize: 100,
       total: 0,
@@ -142,6 +157,25 @@ export default defineComponent({
       var data = {
         PageSize: this.pageSize,
         PageNumber: this.currentPage,
+        BillName: this.billOption.billName,
+        BillType: this.billOption.billType,
+        AccountMax: this.billOption.accountMax,
+        AccountMin: this.billOption.accountMin,
+        DateMax: this.billOption.dateMax,
+        DateMin: this.billOption.dateMin,
+      };
+      this.GetData(data);
+    },
+    SelectTable() {
+      var data = {
+        PageSize: this.pageSize,
+        PageNumber: this.currentPage,
+        BillName: this.billOption.billName,
+        BillType: this.billOption.billType,
+        AccountMax: this.billOption.accountMax,
+        AccountMin: this.billOption.accountMin,
+        DateMax: this.billOption.dateMax,
+        DateMin: this.billOption.dateMin,
       };
       this.GetData(data);
     },
@@ -155,10 +189,15 @@ export default defineComponent({
       var data = {
         PageSize: this.pageSize,
         PageNumber: val,
+        BillName: this.billOption.billName,
+        BillType: this.billOption.billType,
+        AccountMax: this.billOption.accountMax,
+        AccountMin: this.billOption.accountMin,
+        DateMax: this.billOption.dateMax,
+        DateMin: this.billOption.dateMin,
       };
       this.GetData(data);
     },
-
     GetData(data: any) {
       this.showTable = true;
 
@@ -190,6 +229,16 @@ export default defineComponent({
     };
 
     this.GetData(data);
+
+    this.axios
+      .post(api.getBillsTableOption)
+      .then((response) => {
+        this.billNameList = response.data.BillName;
+        this.typeList = response.data.BillType;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 });
 </script>

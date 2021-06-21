@@ -204,7 +204,7 @@ export default defineComponent({
       this.axios
         .post(api.addInvestmentsTable, value)
         .then((response) => {
-          if (response.data.data == true) {
+          if (response.data.successful == true) {
             this.dialogFormVisible = false;
             this.investmentData = new InvestmentData();
             this.RefreshTable();
@@ -221,7 +221,7 @@ export default defineComponent({
       this.axios
         .post(api.updateInvestmentsTable, value)
         .then((response) => {
-          if (response.data.data == true) {
+          if (response.data.successful == true) {
             this.dialogFormVisible = false;
             this.investmentData = new InvestmentData();
             this.RefreshTable();
@@ -236,7 +236,9 @@ export default defineComponent({
     },
     SelectName(id: number) {
       var i = this.investmentData;
-      i.name = (this.itemList.find((c: any) => c.ItemID == id) as any).Name;
+      i.name = (this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any).Name;
+      i.type = (this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any).TypeID;
+      i.activity = (this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any).ActivityStatus;
     },
     formatter(row, column) {
       return row.address;
