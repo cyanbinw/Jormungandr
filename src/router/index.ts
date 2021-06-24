@@ -9,6 +9,7 @@ import TargetData from '../components/Target/TargetData.vue'
 import BudgetExpenditure from '../components/Bill/BudgetExpenditure.vue'
 import Bill from '../components/Bill/Bill.vue'
 import BillTable from '../components/Bill/BillTable.vue'
+import BillDiagram from '../components/Bill/BillDiagram.vue'
 import Desire from '../components/Desire/Desire.vue'
 import DesireTable from '../components/Desire/DesireTable.vue'
 
@@ -31,6 +32,7 @@ const routes = [
     children: [
       { path: 'BudgetExpenditure', component: BudgetExpenditure },
       { path: 'BillTable', component: BillTable },
+      { path: 'BillDiagram', component: BillDiagram },
     ]
   },
 

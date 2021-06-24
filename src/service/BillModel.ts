@@ -43,6 +43,79 @@ export default class BillModel {
       }]
     });
   }
+
+  public showBillPieChart(response: any) {
+    let BillPieChartElem: HTMLElement;
+    const BillPieChartTemp = document.getElementById("BillPieChart");
+    if (BillPieChartTemp) {
+      BillPieChartElem = BillPieChartTemp;
+    } else {
+      return;
+    }
+    var BillPieChart = echarts.init(BillPieChartTemp);
+    BillPieChart.clear();
+    BillPieChart.setOption({
+      color: ['#ff7f50', '#87cefa', '#da70d6', '#32cd32', '#6495ed',
+        '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0',
+        '#1e90ff', '#ff6347', '#7b68ee', '#00fa9a', '#ffd700',
+        '#6699FF', '#ff6666', '#3cb371', '#b8860b', '#30e0e0'],
+      tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b}: {c} ({d}%)",
+      },
+      legend: {
+        top:"6%",
+        left: "center",
+        textStyle: {
+          color: '#c7bbc6'
+        },
+      },
+      series: [
+        {
+          name: "金额",
+          type: "pie",
+          radius: ["45%", "60%"],
+          data: response.data,
+          labelLine: {
+            length: 30,
+          },
+          label: {
+            formatter: "  {b|{b}：}{c}  {per|{d}%}  ",
+            backgroundColor: "#F6F8FC",
+            borderColor: "#8C8D8E",
+            borderWidth: 1,
+            borderRadius: 4,
+  
+            rich: {
+              a: {
+                color: "#6E7079",
+                lineHeight: 22,
+                align: "center",
+              },
+              hr: {
+                borderColor: "#8C8D8E",
+                width: "100%",
+                borderWidth: 1,
+                height: 0,
+              },
+              b: {
+                color: "#4C5058",
+                fontSize: 14,
+                fontWeight: "bold",
+                lineHeight: 33,
+              },
+              per: {
+                color: "#fff",
+                backgroundColor: "#4C5058",
+                padding: [3, 4],
+                borderRadius: 4,
+              },
+            },
+          },
+        },
+      ],
+    });
+  }
 }
 
 export class BillOption {

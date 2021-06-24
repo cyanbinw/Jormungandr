@@ -12,6 +12,8 @@ export class WebAddress {
 
     public getBillsTableOption = this.address + '/v1/Bill/GetBillsOption'
 
+    public getBillsDiagram = this.address + '/v1/Bill/GetBillsDiagram'
+
     public getInvestments = this.address + '/v1/Investment/GetInvestments'
 
     public getInvestmentsTable = this.address + '/v1/Investment/GetInvestmentsTable'

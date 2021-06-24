@@ -20,7 +20,7 @@
             <template #title>账本</template>
             <el-menu-item index="2-2-1" @click="goToBudgetExpenditure()">预算与开支</el-menu-item>
             <el-menu-item index="2-2-2" @click="goToBillTable()">账本表</el-menu-item>
-            <el-menu-item index="2-2-3">账本图表</el-menu-item>
+            <el-menu-item index="2-2-3" @click="goToBillDiagram()">账本图表</el-menu-item>
             <!-- <el-menu-item index="2-2-4">每月简报</el-menu-item> -->
           </el-submenu>
           <!-- <el-menu-item index="2-3" @click="goToDesireTable()">愿望</el-menu-item>
@@ -69,6 +69,9 @@ export default defineComponent({
     },
     goToBillTable(){
       router.push({path: '/Bill/BillTable'})
+    },
+    goToBillDiagram(){
+      router.push({path: '/Bill/BillDiagram'})
     },
     goToDesireTable(){
       router.push({path: '/Desire/DesireTable'})
