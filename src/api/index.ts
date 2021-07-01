@@ -4,9 +4,15 @@ export class WebAddress {
     address: string = 'http://localhost:8080'
     // address: string = 'http://192.168.2.213:8080'
 
-    public getYearAllData = this.address + '/v1/Bill/GetYearAllData'
+    public getBillsYearAllData = this.address + '/v1/Bill/GetBillsYearAllData'
 
-    public getFourMonthAllData = this.address + '/v1/Bill/GetFourMonthAllData'
+    public getBillsDataByMonth = this.address + '/v1/Bill/GetBillsDataByMonth'
+
+    public getBillsTable = this.address + '/v1/Bill/GetBillsTable'
+
+    public getBillsTableOption = this.address + '/v1/Bill/GetBillsOption'
+
+    public getBillsDiagram = this.address + '/v1/Bill/GetBillsDiagram'
 
     public getInvestments = this.address + '/v1/Investment/GetInvestments'
 
