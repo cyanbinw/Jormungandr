@@ -6,7 +6,7 @@ export default class BillTableData{
 	public Type:       string = '';
 	public BillName:   string = '';
 	public Account:    number = 0;
-	public Date:       any = {};
+	public Date:       any = 0;
 	public Remarks:    string = '';
 
     constructor(c: any){
@@ -15,7 +15,7 @@ export default class BillTableData{
         this.Type = c.Type;
         this.BillName = c.BillName;
         this.Account = Number(c.Account);
-        this.Date = moment((c.Date as Date)).format("yyyy-MM-DD hh:mm");
+        this.Date = moment((c.Date as Date)).format("yyyy-MM-DD HH:mm");
         this.Remarks = c.Remarks;
     }
 }
