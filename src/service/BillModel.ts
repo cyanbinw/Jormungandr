@@ -75,7 +75,8 @@ export default class BillModel {
           name: "金额",
           type: "pie",
           radius: ["45%", "60%"],
-          data: response.data,
+          data: response,
+          top:"15%",
           labelLine: {
             length: 30,
           },
