@@ -23,6 +23,7 @@
             <el-menu-item index="2-2-3" @click="goToBillDiagram()">账本图表</el-menu-item>
             <!-- <el-menu-item index="2-2-4">每月简报</el-menu-item> -->
           </el-submenu>
+          <el-menu-item index="2-3" @click="goToWork()">工作</el-menu-item>
           <!-- <el-menu-item index="2-3" @click="goToDesireTable()">愿望</el-menu-item>
           <el-submenu index="2-4">
             <template #title>选项4</template>
@@ -75,6 +76,9 @@ export default defineComponent({
     },
     goToDesireTable(){
       router.push({path: '/Desire/DesireTable'})
+    },
+    goToWork(){
+      router.push({path: '/WorkAndService/Work'})
     }
   }
 });
