@@ -1,6 +1,5 @@
 <template>
   <div
-    id="table"
     style="
       padding: 24px;
       background-color: white;
@@ -62,7 +61,7 @@ export default defineComponent({
           this.billWorkLoading = false;
           ElNotification({
             title: "账本类别失败",
-            message: h("i", { style: "color: teal" }, error),
+            message: h("i", { style: "color: red" }, error),
           });
         });
     },
