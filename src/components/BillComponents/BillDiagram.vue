@@ -88,7 +88,7 @@ import { defineComponent } from "vue";
 import api from "../../api/index";
 import { BillOption } from "../../service/BillModel";
 import BillTableData from "../../service/BillTableData";
-import BillPieChart from "../Shared/BillPieChart.vue";
+import BillPieChart from "../Shared/BillShared/BillPieChart.vue";
 
 export default defineComponent({
   components: { BillPieChart },

@@ -1,13 +1,13 @@
 <template>
-  <div id="BillPieChart" style="width: 100%; height: 800px;float:left;"></div>
+  <div id="InvestmentHistogram" style="width: 600px; height: 400px;float:left;"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import BillModel from "../../service/BillModel";
+import InvestmentModel from "../../../service/InvestmentModel";
 
 export default {
-  name: "BillPieChart",
+  name: "InvestmentPieChart",
   props: ["item"],
   data() {
     return {
@@ -21,13 +21,12 @@ export default {
   watch: {
       item: function(newVal,oldVal){
         this.value = newVal; //newVal即是chartData
-        var i = new BillModel()
-        i.showBillPieChart(this.value)
+        var i = new InvestmentModel()
+        i.showInvestmentHistogram(this.value)
       }
   }
 };
 </script>
 
 <style>
-
 </style>

@@ -18,9 +18,9 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import api from "../../api/index";
-import BillLineChart from "../Shared/BillsLineChart.vue";
-import InvestmentHistogram from "../Shared/InvestmentHistogram.vue";
-import InvestmentPieChart from "../Shared/InvestmentPieChart.vue";
+import BillLineChart from "../Shared/BillShared/BillsLineChart.vue";
+import InvestmentHistogram from "../Shared/InvestmentShared/InvestmentHistogram.vue";
+import InvestmentPieChart from "../Shared/InvestmentShared/InvestmentPieChart.vue";
 import moment from "moment";
 
 export default defineComponent({

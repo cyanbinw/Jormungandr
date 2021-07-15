@@ -16,7 +16,7 @@ import api from "../../api/index";
 import InvestmentTableData, {
   InvestmentData,
 } from "../../service/InvestmentTableData";
-import InvestmentDiagramOffspring from "../Shared/InvestmentDiagramOffspring.vue";
+import InvestmentDiagramOffspring from "../Shared/InvestmentShared/InvestmentDiagramOffspring.vue";
 
 export default defineComponent({
   components: { InvestmentDiagramOffspring },

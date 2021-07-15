@@ -14,6 +14,8 @@ import BillTimeLine from '../components/BillComponents/BillTimeLine.vue'
 import Desire from '../components/DesireComponents/Desire.vue'
 import DesireTable from '../components/DesireComponents/DesireTable.vue'
 import Work from '../components/WorkComponents/Work.vue'
+import BillSet from '../components/SetComponents/BillSet.vue'
+import WorkAndService from '../components/WorkComponents/WorkAndService.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -58,9 +60,10 @@ const routes = [
 
   //WorkAndService
   {
-    path: '/WorkAndService', component: Work,
+    path: '/WorkAndService', component: WorkAndService,
     children: [
-      { path: 'Work', component: Work }
+      { path: 'Work', component: Work },
+      { path: 'BillSet', component: BillSet },
     ]
   },
 ]
