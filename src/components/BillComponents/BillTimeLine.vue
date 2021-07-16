@@ -1,15 +1,28 @@
 <template>
-  <div style="
+  <div
+    style="
       padding: 24px;
       background-color: white;
       border-radius: 15px;
       position: absolute;
       width: 94%;
-    ">
-    <el-timeline>       
-      <el-timeline-item v-for="(item,i) in tableData" :key="i" :timestamp="item.Date" color="#0bbd87" placement="top">
-        {{ item.BillName }} : {{ item.Account }}
-        <br>
+      height: 75%;
+      overflow-y: auto;
+    "
+    @scroll="ScrollEvent"
+  >
+    <el-timeline>
+      <el-timeline-item
+        v-for="(item, i) in tableData"
+        :key="i"
+        :timestamp="item.Date"
+        :color="item.Color"
+        size="large"
+        :icon="item.Icon"
+        placement="top"
+      >
+        {{ item.Type }} - {{ item.BillName }} : {{ item.Account }}
+        <br />
         {{ item.Remarks }}
       </el-timeline-item>
     </el-timeline>
@@ -19,46 +32,44 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import api from "../../api/index";
-import { BillOption } from "../../service/BillModel";
-import BillTableData from "../../service/BillTableData";
+import { BillTimeLine } from "../../service/BillTableData";
 
-const tableData: BillTableData[] = [];
+const tableData: BillTimeLine[] = [];
 
 export default defineComponent({
   data() {
     return {
       tableData: [],
-      typeList: [],
-      billNameList: [],
-      billOption: new BillOption(),
-      dialogFormVisible: false,
-      dataTitle: "",
-      addOrUpdate: true,
-      showTable: true,
       tableHeight: 0,
       pageSize: 100,
-      total: 0,
       currentPage: 1,
     };
   },
   methods: {
+    ScrollEvent(e) {
+      if (
+        e.srcElement.scrollTop + e.srcElement.clientHeight ==
+        e.srcElement.scrollHeight
+      ) {
+        this.currentPage += 1;
+        var data = {
+          PageSize: this.pageSize,
+          PageNumber: this.currentPage,
+        };
+
+        this.GetData(data);
+      }
+    },
     GetData(data: any) {
-      this.showTable = true;
 
       this.axios
-        .post(api.getBillsTable, data)
+        .post(api.getBillsDataByPage, data)
         .then((response) => {
           // 指定图表的配置项和数据
-          this.tableData = [];
-          response.data.BillDetail.forEach((c) => {
-            (this.tableData as BillTableData[]).push(new BillTableData(c));
+          response.data.BillData.forEach((c) => {
+            (this.tableData as BillTimeLine[]).push(new BillTimeLine(c));
           });
 
-          this.total = response.data.Total;
-
-          this.showTable = false;
-          var num = document.getElementById("table")?.clientHeight;
-          this.tableHeight = Number(num) - 60;
           this.$forceUpdate();
         })
         .catch((error) => {
@@ -69,20 +80,10 @@ export default defineComponent({
   mounted() {
     var data = {
       PageSize: this.pageSize,
-      PageNumber: 1,
+      PageNumber: this.currentPage,
     };
 
     this.GetData(data);
-
-    this.axios
-      .post(api.getBillsTableOption)
-      .then((response) => {
-        this.billNameList = response.data.BillName;
-        this.typeList = response.data.BillType;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
 });
 </script>
