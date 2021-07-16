@@ -31,8 +31,13 @@
       >
       </el-date-picker>
     </el-col>
-    <el-col :span="4">
+    <el-col :span="2">
       <el-button @click="RefreshTable()">刷新</el-button>
+    </el-col>
+    <el-col :span="3">
+      <el-input placeholder="请输入内容" v-model="total" :disabled="true">
+        <template #prepend>金额:</template>
+      </el-input>
     </el-col>
   </el-row>
   <el-row>
@@ -96,6 +101,7 @@ export default defineComponent({
       dialogFormVisible: false,
       dataTitle: "",
       addOrUpdate: true,
+      total: 0,
     };
   },
   setup() {},
@@ -132,14 +138,14 @@ export default defineComponent({
       console.log(`每页 ${val} 条`);
     },
     GetData(data: any) {
-
       this.axios
         .post(api.getBillsDiagram, data)
         .then((response) => {
           // 指定图表的配置项和数据
           this.value = {};
           console.log(response);
-          this.value = response;
+          this.value = response.data.billCharts;
+          this.total = response.data.total;
           this.$forceUpdate();
         })
         .catch((error) => {
@@ -148,7 +154,6 @@ export default defineComponent({
     },
   },
   mounted() {
-
     this.GetData(new BillOption());
 
     this.axios
