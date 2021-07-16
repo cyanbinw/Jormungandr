@@ -10,6 +10,7 @@ import BudgetExpenditure from '../components/BillComponents/BudgetExpenditure.vu
 import Bill from '../components/BillComponents/Bill.vue'
 import BillTable from '../components/BillComponents/BillTable.vue'
 import BillDiagram from '../components/BillComponents/BillDiagram.vue'
+import BillTimeLine from '../components/BillComponents/BillTimeLine.vue'
 import Desire from '../components/DesireComponents/Desire.vue'
 import DesireTable from '../components/DesireComponents/DesireTable.vue'
 import Work from '../components/WorkComponents/Work.vue'
@@ -34,6 +35,7 @@ const routes = [
       { path: 'BudgetExpenditure', component: BudgetExpenditure },
       { path: 'BillTable', component: BillTable },
       { path: 'BillDiagram', component: BillDiagram },
+      { path: 'BillTimeLine', component: BillTimeLine },
     ]
   },
 
