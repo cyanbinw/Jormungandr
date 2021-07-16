@@ -37,6 +37,10 @@ export class WebAddress {
     
 
     public setBillNameWork = this.address + '/v1/Work/BillNameSetWork'
+
+    public getBillNameList = this.address + '/v1/Work/GetBillNameList'
+    
+    public updateBillName = this.address + '/v1/Work/UpdateBillName'
 }
 
 const api = new WebAddress();

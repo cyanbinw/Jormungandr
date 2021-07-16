@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import InvestmentModel from "../../service/InvestmentModel";
+import InvestmentModel from "../../../service/InvestmentModel";
 
 export default defineComponent({
   name: "InvestmentDiagramOffspring",

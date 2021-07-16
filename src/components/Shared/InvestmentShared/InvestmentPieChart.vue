@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import InvestmentModel from "../../service/InvestmentModel";
+import InvestmentModel from "../../../service/InvestmentModel";
 
 export default {
   name: "InvestmentPieChart",

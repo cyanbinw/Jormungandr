@@ -43,3 +43,17 @@ export class BillTimeLine{
         this.Remarks = c.Remarks;
     }
 }
+
+export class BillNameConfig{
+    public ID: number = 0;
+	public BillName:   string = '';
+    public Color:      string = '';
+    public Icon:       string = '';
+
+    add(c: any){
+        this.ID = Number(c.ID);
+        this.BillName = c.BillName;
+        this.Color = c.Color;
+        this.Icon = c.Icon;
+    }
+}
