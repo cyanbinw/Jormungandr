@@ -14,6 +14,8 @@ export class WebAddress {
 
     public getBillsDiagram = this.address + '/v1/Bill/GetBillsDiagram'
 
+
+
     public getInvestments = this.address + '/v1/Investment/GetInvestments'
 
     public getInvestmentsTable = this.address + '/v1/Investment/GetInvestmentsTable'
@@ -26,7 +28,13 @@ export class WebAddress {
 
     public getInvestmentOption = this.address + '/v1/Investment/GetInvestmentOption'
 
+
+
     public getTarget = this.address + '/v1/Target/GetTarget'
+
+    
+
+    public setBillNameWork = this.address + '/v1/Work/BillNameSetWork'
 }
 
 const api = new WebAddress();

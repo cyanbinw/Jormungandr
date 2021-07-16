@@ -4,14 +4,15 @@ import Home from '../components/HomeComponents/Home.vue'
 import Investment from '../components/InvestmentComponents/Investment.vue'
 import InvestmentDiagram from '../components/InvestmentComponents/InvestmentDiagram.vue'
 import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.vue'
-import Target from '../components/Target/Target.vue'
-import TargetData from '../components/Target/TargetData.vue'
-import BudgetExpenditure from '../components/Bill/BudgetExpenditure.vue'
-import Bill from '../components/Bill/Bill.vue'
-import BillTable from '../components/Bill/BillTable.vue'
-import BillDiagram from '../components/Bill/BillDiagram.vue'
-import Desire from '../components/Desire/Desire.vue'
-import DesireTable from '../components/Desire/DesireTable.vue'
+import Target from '../components/TargetComponents/Target.vue'
+import TargetData from '../components/TargetComponents/TargetData.vue'
+import BudgetExpenditure from '../components/BillComponents/BudgetExpenditure.vue'
+import Bill from '../components/BillComponents/Bill.vue'
+import BillTable from '../components/BillComponents/BillTable.vue'
+import BillDiagram from '../components/BillComponents/BillDiagram.vue'
+import Desire from '../components/DesireComponents/Desire.vue'
+import DesireTable from '../components/DesireComponents/DesireTable.vue'
+import Work from '../components/WorkComponents/Work.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -50,6 +51,14 @@ const routes = [
     path: '/Target', component: Target,
     children: [
       { path: 'TargetData', component: TargetData }
+    ]
+  },
+
+  //WorkAndService
+  {
+    path: '/WorkAndService', component: Work,
+    children: [
+      { path: 'Work', component: Work }
     ]
   },
 ]
