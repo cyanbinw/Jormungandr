@@ -66,7 +66,7 @@ export class InvestmentData {
         this.netWorth = Number(data.netWorth)
         this.type = Number(data.type)
         this.activity = Number(data.activity)
-        this.date = new Date(data.date)
+        this.date = new Date(moment((data.date as Date)).format("yyyy-MM-DD"))
     }
 
     addForInvestmentTableData(data: InvestmentTableData){
@@ -78,6 +78,6 @@ export class InvestmentData {
         this.netWorth = Number(data.NetWorth)
         this.type = Number(data.TypeID)
         this.activity = Number(data.ActivityStatus)
-        this.date = new Date(data.Date)
+        this.date = new Date(moment((data.Date as Date)).format("yyyy-MM-DD"))
     }
 }
