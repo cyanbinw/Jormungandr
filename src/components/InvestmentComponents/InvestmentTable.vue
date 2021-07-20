@@ -245,6 +245,7 @@ export default defineComponent({
     },
     RefreshTable() {
       this.GetData();
+      this.GetOption();
     },
     Refresh() {
       this.$forceUpdate();
@@ -271,14 +272,14 @@ export default defineComponent({
           console.log(error);
         });
     },
-  },
-  mounted() {
-    this.GetData();
-
-    this.axios
+    GetOption(){
+      this.axios
       .post(api.getInvestmentOption)
       .then((response) => {
         // 指定图表的配置项和数据
+        this.typeList = [];
+        this.activityList = [];
+        this.itemList = [];
         this.typeList = response.data.type;
         this.activityList = response.data.activity;
         this.itemList = response.data.item;
@@ -286,6 +287,12 @@ export default defineComponent({
       .catch((error) => {
         console.log(error);
       });
+    }
+  },
+  mounted() {
+    this.GetData();
+
+    this.GetOption();
   },
 });
 </script>
