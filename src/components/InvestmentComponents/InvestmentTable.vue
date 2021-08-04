@@ -136,12 +136,14 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-date-picker
-          v-model="investmentData.date"
-          type="date"
-          placeholder="选择日期"
-        >
-        </el-date-picker>
+        <el-col :span="12">
+          <el-date-picker
+            v-model="investmentData.date"
+            type="date"
+            placeholder="选择日期"
+          >
+          </el-date-picker>
+        </el-col>
       </el-row>
     </el-form>
     <template #footer>
@@ -236,9 +238,15 @@ export default defineComponent({
     },
     SelectName(id: number) {
       var i = this.investmentData;
-      i.name = (this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any).Name;
-      i.type = (this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any).TypeID;
-      i.activity = (this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any).ActivityStatus;
+      i.name = (
+        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
+      ).Name;
+      i.type = (
+        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
+      ).TypeID;
+      i.activity = (
+        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
+      ).ActivityStatus;
     },
     formatter(row, column) {
       return row.address;
@@ -272,22 +280,22 @@ export default defineComponent({
           console.log(error);
         });
     },
-    GetOption(){
+    GetOption() {
       this.axios
-      .post(api.getInvestmentOption)
-      .then((response) => {
-        // 指定图表的配置项和数据
-        this.typeList = [];
-        this.activityList = [];
-        this.itemList = [];
-        this.typeList = response.data.type;
-        this.activityList = response.data.activity;
-        this.itemList = response.data.item;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
+        .post(api.getInvestmentOption)
+        .then((response) => {
+          // 指定图表的配置项和数据
+          this.typeList = [];
+          this.activityList = [];
+          this.itemList = [];
+          this.typeList = response.data.type;
+          this.activityList = response.data.activity;
+          this.itemList = response.data.item;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   mounted() {
     this.GetData();
