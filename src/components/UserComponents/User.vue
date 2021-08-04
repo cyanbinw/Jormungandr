@@ -6,6 +6,12 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "App",
+    
+  mounted() {
+      
+  },
 });
 </script>
+
+<style>
+</style>
