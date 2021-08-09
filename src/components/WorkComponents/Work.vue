@@ -20,7 +20,7 @@
     </el-row>
     <el-divider></el-divider>
     <el-row>
-      <el-button type="primary" :loading="billWorkLoading" round
+      <el-button type="primary" :loading="billWorkLoading" @click="billWork()" round
         >设置账本类别</el-button
       >
     </el-row>
