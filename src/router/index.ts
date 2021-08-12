@@ -21,6 +21,7 @@ import User from '../components/UserComponents/User.vue'
 import Filter from '../components/Filter.vue'
 
 const routes = [
+  { path: '/', redirect: '/Filter/About' },
   {
     path: '/Filter/:id', component: Filter,
     children: [
