@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, useRoute } from 'vue-router'
 import About from '../components/About.vue'
 import Home from '../components/HomeComponents/Home.vue'
 import Investment from '../components/InvestmentComponents/Investment.vue'
@@ -16,23 +16,31 @@ import DesireTable from '../components/DesireComponents/DesireTable.vue'
 import Work from '../components/WorkComponents/Work.vue'
 import BillSet from '../components/SetComponents/BillSet.vue'
 import WorkAndService from '../components/WorkComponents/WorkAndService.vue'
+import Login from '../components/UserComponents/Login.vue'
+import User from '../components/UserComponents/User.vue'
+import Filter from '../components/Filter.vue'
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/Home', component: Home },
-  { path: '/About', component: About },
+  {
+    path: '/Filter/:id', component: Filter,
+    children: [
+      { path: '/Home', component: Home },
+      { path: '/About', component: About },
+    ]
+  },
+
   //Investment
   {
-    path: '/Investment', component: Investment,
+    path: '/Investment/:id', component: Filter,
     children: [
       { path: 'InvestmentDiagram', component: InvestmentDiagram },
-      { path: 'InvestmentTable', component: InvestmentTable },     
+      { path: 'InvestmentTable', component: InvestmentTable },
     ]
   },
 
   //Bill
   {
-    path: '/Bill', component: Bill,
+    path: '/Bill/:id', component: Filter,
     children: [
       { path: 'BudgetExpenditure', component: BudgetExpenditure },
       { path: 'BillTable', component: BillTable },
@@ -44,7 +52,7 @@ const routes = [
 
   //Desire
   {
-    path: '/Desire', component: Desire,
+    path: '/Desire/:id', component: Filter,
     children: [
       { path: 'DesireTable', component: DesireTable }
     ]
@@ -52,7 +60,7 @@ const routes = [
 
   //Target
   {
-    path: '/Target', component: Target,
+    path: '/Target/:id', component: Filter,
     children: [
       { path: 'TargetData', component: TargetData }
     ]
@@ -60,12 +68,19 @@ const routes = [
 
   //WorkAndService
   {
-    path: '/WorkAndService', component: WorkAndService,
+    path: '/WorkAndService/:id', component: Filter,
     children: [
       { path: 'Work', component: Work },
       { path: 'BillSet', component: BillSet },
     ]
   },
+  //User
+  {
+    path: '/User', component: User,
+    children: [
+      { path: 'Login', component: Login }
+    ]
+  }
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
