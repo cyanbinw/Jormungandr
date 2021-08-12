@@ -119,7 +119,7 @@ export default defineComponent({
   mounted() {
     var data = this.$route.params.id;
     if (typeof data == "string" && data != null && data != "") {
-      router.push({ path: "/User/LogIn" });
+      //router.push({ path: "/User/LogIn" });
       return;
     }
     this.id = data as string;
