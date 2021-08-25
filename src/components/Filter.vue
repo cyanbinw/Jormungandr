@@ -66,6 +66,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import router from "../router";
+import api from "../api/index";
 
 export default defineComponent({
   data() {
@@ -109,7 +110,7 @@ export default defineComponent({
       router.push({ path: "/Desire/DesireTable", params: { id: this.id } });
     },
     goToWork() {
-      router.push({ path: "/WorkAndService/Work", params: { id: this.id } });
+      router.push({ path: "/WorkAndService/Work"});
     },
     goToBillSet() {
       router.push({ path: "/WorkAndService/BillSet", params: { id: this.id } });
@@ -119,9 +120,19 @@ export default defineComponent({
   mounted() {
     var data = this.$route.params.id;
     if (typeof data == "string" && data != null && data != "") {
-      //router.push({ path: "/User/LogIn" });
+      this.axios
+        .post(api.validateToken, data)
+        .then((response) => {
+          if ((response.data.Successful as boolean) == true) {
+            data = response.data.Data;
+          } else router.push({ path: "/User/LogIn" });
+        })
+        .catch((error) => {
+          router.push({ path: "/User/LogIn" });
+        });
       return;
     }
+    router.push({ path: "/User/LogIn" });
     this.id = data as string;
   },
 });

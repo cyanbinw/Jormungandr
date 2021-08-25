@@ -67,6 +67,10 @@ const routes = [
     ]
   },
 
+  {
+    path: '/WorkAndService/Work', component: Work
+  },
+
   //WorkAndService
   {
     path: '/WorkAndService', component: Filter,
@@ -75,6 +79,7 @@ const routes = [
       { path: 'BillSet', component: BillSet },
     ]
   },
+
   //User
   {
     path: '/User', component: User,
