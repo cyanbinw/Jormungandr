@@ -20,9 +20,26 @@
     </el-row>
     <el-divider></el-divider>
     <el-row>
-      <el-button type="primary" :loading="billWorkLoading" round
-        >设置账本类别</el-button
-      >
+      <el-col :span="3">
+        <el-button
+          type="primary"
+          :loading="billWorkLoading"
+          @click="billWork()"
+          round
+          >设置账本类别</el-button
+        >
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="3">
+        <el-button
+          type="primary"
+          :loading="userWorkLoading"
+          @click="userWork()"
+          round
+          >设置用户初始化</el-button
+        >
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -38,6 +55,7 @@ export default defineComponent({
       allService: true,
       allWorkLoading: false,
       billWorkLoading: false,
+      userWorkloading: false,
     };
   },
   methods: {
@@ -62,6 +80,25 @@ export default defineComponent({
           this.billWorkLoading = false;
           ElNotification({
             title: "账本类别失败",
+            message: h("i", { style: "color: red" }, error),
+          });
+        });
+    },
+    userWork() {
+      this.userWorkloading = true;
+      this.axios
+        .post(api.setUserWork)
+        .then((response) => {
+          this.userWorkloading = false;
+          ElNotification({
+            title: "用户初始化成功",
+            message: h("i", { style: "color: teal" }, "已完成用户初始化设置"),
+          });
+        })
+        .catch((error) => {
+          this.userWorkloading = false;
+          ElNotification({
+            title: "用户初始化失败",
             message: h("i", { style: "color: red" }, error),
           });
         });

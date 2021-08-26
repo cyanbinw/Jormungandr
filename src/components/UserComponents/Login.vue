@@ -18,6 +18,7 @@
     <el-col :span="4">
       <el-checkbox v-model="remember">记住我</el-checkbox>
     </el-col>
+  </el-row>
   <el-row>
     <el-col :span="4">
       <el-button type="primary" @loading="loading" @click="login()"
