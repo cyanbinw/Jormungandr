@@ -20,7 +20,9 @@
     </el-col>
   <el-row>
     <el-col :span="4">
-      <el-button type="primary" @loading="loading" @click="login()">登陆</el-button>
+      <el-button type="primary" @loading="loading" @click="login()"
+        >登陆</el-button
+      >
     </el-col>
   </el-row>
 </template>
@@ -41,24 +43,26 @@ export default defineComponent({
   },
   methods: {
     login() {
-      this.loading = true
+      this.loading = true;
       var value = {
         userName: this.userName,
         password: this.password,
-      }
+      };
       this.axios
-        .post(api.validateToken, value)
+        .post(api.login, value)
         .then((response) => {
-          if (response.data.successful == true) {           
-            router.push({ path: "/Filter/Home", params: { id: response.data.data } });
+          if (response.data.successful == true) {
+            router.push({
+              path: "/Filter/" + response.data.data + "/Home"
+            });
           }
         })
         .catch((error) => {
-          console.log(error)
-          this.loading = false
+          console.log(error);
+          this.loading = false;
         });
       return;
-    }
+    },
   },
 });
 </script>

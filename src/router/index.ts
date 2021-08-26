@@ -67,6 +67,8 @@ const routes = [
     ]
   },
 
+  { path: '/WorkAndService/Work', component: Work },
+
   //WorkAndService
   {
     path: '/WorkAndService/:id', component: Filter,
