@@ -21,18 +21,18 @@ import User from '../components/UserComponents/User.vue'
 import Filter from '../components/Filter.vue'
 
 const routes = [
-  { path: '/', redirect: '/Filter/Home' },
+  { path: '/', redirect: '/Filter/About' },
   {
-    path: '/Filter', component: Filter,
+    path: '/Filter/:id', component: Filter,
     children: [
-      { path: 'Home', component: Home },
-      { path: 'About', component: About },
+      { path: '/Home', component: Home },
+      { path: '/About', component: About },
     ]
   },
 
   //Investment
   {
-    path: '/Investment', component: Filter,
+    path: '/Investment/:id', component: Filter,
     children: [
       { path: 'InvestmentDiagram', component: InvestmentDiagram },
       { path: 'InvestmentTable', component: InvestmentTable },
@@ -41,7 +41,7 @@ const routes = [
 
   //Bill
   {
-    path: '/Bill', component: Filter,
+    path: '/Bill/:id', component: Filter,
     children: [
       { path: 'BudgetExpenditure', component: BudgetExpenditure },
       { path: 'BillTable', component: BillTable },
@@ -53,7 +53,7 @@ const routes = [
 
   //Desire
   {
-    path: '/Desire', component: Filter,
+    path: '/Desire/:id', component: Filter,
     children: [
       { path: 'DesireTable', component: DesireTable }
     ]
@@ -61,25 +61,20 @@ const routes = [
 
   //Target
   {
-    path: '/Target', component: Filter,
+    path: '/Target/:id', component: Filter,
     children: [
       { path: 'TargetData', component: TargetData }
     ]
   },
 
-  {
-    path: '/WorkAndService/Work', component: Work
-  },
-
   //WorkAndService
   {
-    path: '/WorkAndService', component: Filter,
+    path: '/WorkAndService/:id', component: Filter,
     children: [
       { path: 'Work', component: Work },
       { path: 'BillSet', component: BillSet },
     ]
   },
-
   //User
   {
     path: '/User', component: User,
