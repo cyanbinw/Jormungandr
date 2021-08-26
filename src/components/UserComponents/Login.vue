@@ -18,6 +18,10 @@
     <el-col :span="4">
       <el-checkbox v-model="remember">记住我</el-checkbox>
     </el-col>
+  <el-row>
+    <el-col :span="4">
+      <el-button type="primary" @loading="loading" @click="login()">登陆</el-button>
+    </el-col>
   </el-row>
   <el-row>
     <el-col :span="4">
@@ -50,8 +54,8 @@ export default defineComponent({
       this.axios
         .post(api.validateToken, value)
         .then((response) => {
-          if ((response.data.Successful as boolean) == true) {
-            router.push({ path: "/Filter/Home", params: { id: response.data.Data } });
+          if (response.data.successful == true) {           
+            router.push({ path: "/Filter/Home", params: { id: response.data.data } });
           }
         })
         .catch((error) => {
