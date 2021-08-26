@@ -77,63 +77,60 @@ export default defineComponent({
 
   methods: {
     goToHome() {
-      router.push({ path: "/Filter/Home", params: { id: this.id } });
+      router.push({ path: "/Filter/" + this.id + "/Home"});
     },
     goToInvestmentTable() {
       router.push({
-        path: "/Investment/InvestmentTable",
-        params: { id: this.id },
+        path: "/Investment/" + this.id + "/InvestmentTable",
       });
     },
     goToInvestmentDiagram() {
       router.push({
-        path: "/Investment/InvestmentDiagram",
-        params: { id: this.id },
+        path: "/Investment/" + this.id + "/InvestmentDiagram",
       });
     },
     goToTarget() {
-      router.push({ path: "/Target/TargetData", params: { id: this.id } });
+      router.push({ path: "/Target/" + this.id + "/TargetData"});
     },
     goToBudgetExpenditure() {
-      router.push({ path: "/Bill/BudgetExpenditure", params: { id: this.id } });
+      router.push({ path: "/Bill/" + this.id + "/BudgetExpenditure"});
     },
     goToBillTable() {
-      router.push({ path: "/Bill/BillTable", params: { id: this.id } });
+      router.push({ path: "/Bill/" + this.id + "/BillTable"});
     },
     goToBillDiagram() {
-      router.push({ path: "/Bill/BillDiagram", params: { id: this.id } });
+      router.push({ path: "/Bill/" + this.id + "/BillDiagram"});
     },
     goToBillTimeLine() {
-      router.push({ path: "/Bill/BillTimeLine", params: { id: this.id } });
+      router.push({ path: "/Bill/" + this.id + "/BillTimeLine"});
     },
     goToDesireTable() {
-      router.push({ path: "/Desire/DesireTable", params: { id: this.id } });
+      router.push({ path: "/Desire/" + this.id + "/DesireTable"});
     },
     goToWork() {
       router.push({ path: "/WorkAndService/Work"});
     },
     goToBillSet() {
-      router.push({ path: "/WorkAndService/BillSet", params: { id: this.id } });
+      router.push({ path: "/WorkAndService/" + this.id + "/BillSet"});
     },
   },
 
   mounted() {
-    var data = this.$route.params.id;
-    if (typeof data == "string" && data != null && data != "") {
+    var data = {
+        TokenNum: this.$route.params.id
+      };
+    if (data.TokenNum != null && data.TokenNum != "") {
       this.axios
         .post(api.validateToken, data)
         .then((response) => {
-          if ((response.data.Successful as boolean) == true) {
-            data = response.data.Data;
-          } else router.push({ path: "/User/LogIn" });
+          if (response.data.successful == true) {
+            this.id = response.data.data;
+          } else router.push({ path: "/User/Login" });
         })
         .catch((error) => {
-          router.push({ path: "/User/LogIn" });
+          router.push({ path: "/User/Login" });
         });
-      return;
-    }
-    router.push({ path: "/User/LogIn" });
-    this.id = data as string;
+    } else router.push({ path: "/User/Login" });
   },
 });
 </script>
