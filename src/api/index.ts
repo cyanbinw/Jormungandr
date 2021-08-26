@@ -47,6 +47,7 @@ export class WebAddress {
 
 
     public login = this.address + '/v1/User/Login'
+    
     public validateToken = this.address + '/v1/User/Login'
 }
 
