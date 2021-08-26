@@ -25,8 +25,8 @@ const routes = [
   {
     path: '/Filter/:id', component: Filter,
     children: [
-      { path: '/Home', component: Home },
-      { path: '/About', component: About },
+      { path: 'Home', component: Home },
+      { path: 'About', component: About },
     ]
   },
 

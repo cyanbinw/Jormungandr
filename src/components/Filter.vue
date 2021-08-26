@@ -108,7 +108,7 @@ export default defineComponent({
       router.push({ path: "/Desire/" + this.id + "/DesireTable"});
     },
     goToWork() {
-      router.push({ path: "/WorkAndService/Work"});
+      router.push({ path: "/WorkAndService/Work" });
     },
     goToBillSet() {
       router.push({ path: "/WorkAndService/" + this.id + "/BillSet"});
@@ -124,7 +124,7 @@ export default defineComponent({
         .post(api.validateToken, data)
         .then((response) => {
           if (response.data.successful == true) {
-            this.id = response.data.data;
+            this.id = data.TokenNum as string;
           } else router.push({ path: "/User/Login" });
         })
         .catch((error) => {
