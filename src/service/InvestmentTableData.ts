@@ -49,7 +49,7 @@ export default class InvestmentTableData {
 export class InvestmentData {
     public id!:number
     public itemID!:number
-    public code!:number
+    public code!:string
     public name!: string
     public account!: number
     public share!: number
@@ -64,7 +64,7 @@ export class InvestmentData {
     add(data: any){
         this.id = Number(data.id)
         this.itemID = Number(data.itemID)
-        this.code = Number(data.code)
+        this.code = data.code
         this.name = data.name
         this.account = Number(data.account)
         this.share = Number(data.share)
@@ -77,7 +77,7 @@ export class InvestmentData {
     addForInvestmentTableData(data: InvestmentTableData){
         this.id = Number(data.ID)
         this.itemID = Number(data.ItemID)
-        this.code = Number(data.Code)
+        this.code = data.Code
         this.name = data.Name
         this.account = Number(data.Account)
         this.share = Number(data.Share)

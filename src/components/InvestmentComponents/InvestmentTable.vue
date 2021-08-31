@@ -26,6 +26,7 @@
           :height="tableHeight"
           highlight-current-row
         >
+          <el-table-column sortable prop="Code" label="Code"> </el-table-column>
           <el-table-column sortable prop="Name" label="Name"> </el-table-column>
           <el-table-column sortable prop="Account" label="Account">
           </el-table-column>
@@ -75,7 +76,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="investmentData.Code" placeholder="Code"></el-input>
+          <el-input v-model="investmentData.code" placeholder="Code"></el-input>
         </el-col>
       </el-row>
       <el-row>
