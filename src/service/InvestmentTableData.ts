@@ -4,6 +4,7 @@ import moment from "moment"
 export default class InvestmentTableData {
     public ID: number = 0;
     public ItemID: number = 0;
+    public Code: number = 0
     public Name: string = '';
     public TypeID: number = 0;
     public TypeName: string = '';
@@ -17,6 +18,7 @@ export default class InvestmentTableData {
     constructor(data: any) {
         this.ID = data.id;
         this.ItemID = data.itemID;
+        this.Code = data.code;
         this.Name = data.name;
         this.TypeID = data.type;
         this.TypeName = data.typeName;
@@ -31,6 +33,7 @@ export default class InvestmentTableData {
     add(data: any) {
         this.ID = data.id;
         this.ItemID = data.itemID;
+        this.Code = data.code;
         this.Name = data.name;
         this.TypeID = data.type;
         this.TypeName = data.typeName;
@@ -46,6 +49,7 @@ export default class InvestmentTableData {
 export class InvestmentData {
     public id!:number
     public itemID!:number
+    public code!:number
     public name!: string
     public account!: number
     public share!: number
@@ -60,6 +64,7 @@ export class InvestmentData {
     add(data: any){
         this.id = Number(data.id)
         this.itemID = Number(data.itemID)
+        this.code = Number(data.code)
         this.name = data.name
         this.account = Number(data.account)
         this.share = Number(data.share)
@@ -72,6 +77,7 @@ export class InvestmentData {
     addForInvestmentTableData(data: InvestmentTableData){
         this.id = Number(data.ID)
         this.itemID = Number(data.ItemID)
+        this.code = Number(data.Code)
         this.name = data.Name
         this.account = Number(data.Account)
         this.share = Number(data.Share)

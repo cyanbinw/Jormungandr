@@ -55,11 +55,7 @@
     <el-form :model="form">
       <el-row>
         <el-col :span="12">
-          <el-input
-            placeholder="Name"
-            v-model="investmentData.name"
-            class="input-with-select"
-          >
+          <el-input placeholder="Name" v-model="investmentData.name">
             <template #prepend>
               <el-select
                 style="width: 180px"
@@ -77,6 +73,9 @@
               </el-select>
             </template>
           </el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-input v-model="investmentData.Code" placeholder="Code"></el-input>
         </el-col>
       </el-row>
       <el-row>
