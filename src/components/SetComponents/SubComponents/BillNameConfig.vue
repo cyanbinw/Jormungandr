@@ -11,7 +11,7 @@
         <el-table-column fixed prop="BillName" label="Name"> </el-table-column>
         <el-table-column fixed prop="Color" label="Color">
           <template #default="scope">
-            <div style="width: 80%; height:90%;"> 
+            <div style="width: 80%; height: 90%">
               <el-tag :color="scope.row.Color">颜色展示</el-tag>
             </div>
           </template>
@@ -97,10 +97,24 @@ export default {
       console.log(this.selectedBillName);
     },
     openEdit(index: number, data: BillNameConfig) {
-      this.selectedBillName = data;
+      this.selectedBillName.add(data);
       this.dialogVisible = true;
     },
     save() {
+      var i = this.billNameList.find(
+        (c: BillNameConfig) =>
+          (c.Color == this.selectedBillName.Color ||
+            c.Icon == this.selectedBillName.Icon) &&
+          c.ID != this.selectedBillName.ID
+      );
+      if (i != null) {
+        ElNotification({
+          title: "保存失败",
+          message: "颜色或图标重复",
+        });
+        return;
+      }
+
       this.axios
         .post(api.updateBillName, this.selectedBillName)
         .then((response) => {
