@@ -67,7 +67,7 @@ const routes = [
     ]
   },
 
-  { path: '/WorkAndService/Work', component: Work },
+  { path: '/Work', component: Work },
 
   //WorkAndService
   {

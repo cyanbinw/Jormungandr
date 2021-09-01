@@ -108,7 +108,7 @@ export default defineComponent({
       router.push({ path: "/Desire/" + this.id + "/DesireTable"});
     },
     goToWork() {
-      router.push({ path: "/WorkAndService/Work" });
+      router.push({ path: "/Work" });
     },
     goToBillSet() {
       router.push({ path: "/WorkAndService/" + this.id + "/BillSet"});

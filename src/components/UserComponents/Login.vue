@@ -26,11 +26,6 @@
       >
     </el-col>
   </el-row>
-  <el-row>
-    <el-col :span="4">
-      <el-button type="primary" loading="" @click="login()">登陆</el-button>
-    </el-col>
-  </el-row>
 </template>
 
 <script lang="ts">
