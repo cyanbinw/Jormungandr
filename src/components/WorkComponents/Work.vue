@@ -23,6 +23,17 @@
       <el-col :span="3">
         <el-button
           type="primary"
+          :loading="investmentItemWorkLoading"
+          @click="investmentItemWork()"
+          round
+          >设置Investment Item</el-button
+        >
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="3">
+        <el-button
+          type="primary"
           :loading="billWorkLoading"
           @click="billWork()"
           round
@@ -54,6 +65,7 @@ export default defineComponent({
     return {
       allService: true,
       allWorkLoading: false,
+      investmentItemWorkLoading: false,
       billWorkLoading: false,
       userWorkloading: false,
     };
@@ -99,6 +111,25 @@ export default defineComponent({
           this.userWorkloading = false;
           ElNotification({
             title: "用户初始化失败",
+            message: h("i", { style: "color: red" }, error),
+          });
+        });
+    },
+    investmentItemWork() {
+      this.userWorkloading = true;
+      this.axios
+        .post(api.setInvestmentItemWork)
+        .then((response) => {
+          this.userWorkloading = false;
+          ElNotification({
+            title: "InvestmentItem更新成功",
+            message: h("i", { style: "color: teal" }, "已完成InvestmentItem更新"),
+          });
+        })
+        .catch((error) => {
+          this.userWorkloading = false;
+          ElNotification({
+            title: "InvestmentItem更新失败",
             message: h("i", { style: "color: red" }, error),
           });
         });
