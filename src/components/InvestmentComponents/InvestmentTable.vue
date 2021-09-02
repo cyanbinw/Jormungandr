@@ -238,15 +238,15 @@ export default defineComponent({
     },
     SelectName(id: number) {
       var i = this.investmentData;
+      i.code = (
+        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
+      ).Code;
       i.name = (
         this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
       ).Name;
       i.type = (
         this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
       ).TypeID;
-      i.activity = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).ActivityStatus;
     },
     formatter(row, column) {
       return row.address;
