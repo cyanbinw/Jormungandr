@@ -48,8 +48,8 @@ export default defineComponent({
   methods: {
     ScrollEvent(e) {
       if (
-        e.srcElement.scrollTop + e.srcElement.clientHeight ==
-        e.srcElement.scrollHeight
+        e.srcElement.scrollTop + e.srcElement.clientHeight >=
+        e.srcElement.scrollHeight - 1
       ) {
         this.currentPage += 1;
         var data = {
