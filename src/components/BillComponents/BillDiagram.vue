@@ -35,7 +35,7 @@
       <el-button @click="RefreshTable()">刷新</el-button>
     </el-col>
     <el-col :span="3">
-      <el-input placeholder="请输入内容" v-model="total" :disabled="true">
+      <el-input v-model="total" :disabled="true">
         <template #prepend>金额:</template>
       </el-input>
     </el-col>
