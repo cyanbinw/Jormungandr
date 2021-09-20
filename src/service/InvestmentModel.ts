@@ -69,10 +69,14 @@ export default class InvestmentModel {
           selectedMode: "single",
           radius: [0, "30%"],
           label: {
-            show: false,
-            position: "center",
-          },
-          data: response.data.Share,
+            position: 'inner',
+            fontSize: 12,
+        },
+        labelLine: {
+          length: 10,
+        },
+
+          data: response.data.Proportion,
         },
         {
           name: "投资金额",
