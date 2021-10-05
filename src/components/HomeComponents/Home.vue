@@ -86,7 +86,7 @@ export default defineComponent({
             (this.BillValue[num] as any[]).push(c);
           }
         });
-        this.BillValue;
+        this.BillValue = this.BillValue.reverse();
       })
       .catch((error) => {
         console.log(error);

@@ -4,7 +4,7 @@ import moment from "moment"
 export default class InvestmentTableData {
     public ID: number = 0;
     public ItemID: number = 0;
-    public Code: number = 0
+    public Code: string = '';
     public Name: string = '';
     public TypeID: number = 0;
     public TypeName: string = '';
