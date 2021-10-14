@@ -46,6 +46,8 @@ export class WebAddress {
 
     public setInvestmentItemWork = this.address + '/v1/Work/InvestmentItemSetWork'
 
+    public setInvestmentTypeWork = this.address + '/v1/Work/InvestmentTypeSetWork'
+
 
 
     public login = this.address + '/v1/User/Login'
