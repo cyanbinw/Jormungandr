@@ -38,6 +38,15 @@
           >设置Investment Type</el-button
         >
       </el-col>
+      <el-col :span="3">
+        <el-button
+          type="primary"
+          :loading="investmentServiceChargeWorkLoading"
+          @click="investmentServiceChargeWork()"
+          round
+          >设置Investment Service Charge</el-button
+        >
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span="3">
@@ -76,6 +85,7 @@ export default defineComponent({
       allWorkLoading: false,
       investmentItemWorkLoading: false,
       investmentTypeWorkLoading: false,
+      investmentServiceChargeWorkLoading: false,
       billWorkLoading: false,
       userWorkloading: false,
     };
@@ -157,6 +167,25 @@ export default defineComponent({
         })
         .catch((error) => {
           this.investmentTypeWorkLoading = false;
+          ElNotification({
+            title: "InvestmentType更新失败",
+            message: h("i", { style: "color: red" }, error),
+          });
+        });
+    },
+    investmentServiceChargeWork() {
+      this.investmentServiceChargeWorkLoading = true;
+      this.axios
+        .post(api.setInvestmentServiceChargeWork)
+        .then((response) => {
+          this.investmentServiceChargeWorkLoading = false;
+          ElNotification({
+            title: "InvestmentItem更新成功",
+            message: h("i", { style: "color: teal" }, "已完成InvestmentType更新"),
+          });
+        })
+        .catch((error) => {
+          this.investmentServiceChargeWorkLoading = false;
           ElNotification({
             title: "InvestmentType更新失败",
             message: h("i", { style: "color: red" }, error),
