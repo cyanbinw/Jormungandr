@@ -110,6 +110,29 @@
         </el-col>
       </el-row>
       <el-row>
+        <el-col :span="4">
+          <el-button type="primary" @click="AddServiceCharge()">添加</el-button>
+        </el-col>
+      </el-row>
+      <el-row
+        v-for="(item, i) in serviceChargeList"
+        :key="i"
+        :label="item"
+        :value="item"
+      >
+        <el-col :span="4">
+          <el-select placeholder="Type">
+            <el-option> </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6">
+          <el-input placeholder="Name"> </el-input>
+        </el-col>
+        <el-col :span="2">
+          <el-button icon="el-icon-delete" @click="DeleteServiceCharge(i)" circle></el-button>
+        </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-select v-model="investmentData.type" placeholder="Type">
             <el-option
@@ -165,6 +188,7 @@ import { defineComponent } from "vue";
 import api from "../../api/index";
 import InvestmentTableData, {
   InvestmentData,
+  InvestmentServiceCharge,
 } from "../../service/InvestmentTableData";
 
 const tableData: InvestmentTableData[] = [];
@@ -182,6 +206,7 @@ export default defineComponent({
       showTable: true,
       itemList: [] as [],
       tableHeight: 0,
+      serviceChargeList: [],
     };
   },
   setup() {},
@@ -295,6 +320,17 @@ export default defineComponent({
         .catch((error) => {
           console.log(error);
         });
+    },
+
+    AddServiceCharge() {
+      (this.serviceChargeList as InvestmentServiceCharge[]).push(
+        new InvestmentServiceCharge()
+      );
+      this.$forceUpdate();
+    },
+    DeleteServiceCharge(i:number) {
+      this.serviceChargeList = this.serviceChargeList.filter((item,c) => c !== i)
+      this.$forceUpdate();
     },
   },
   mounted() {

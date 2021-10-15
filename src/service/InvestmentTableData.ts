@@ -87,3 +87,9 @@ export class InvestmentData {
         this.date = new Date(moment((data.Date as Date)).format("yyyy-MM-DD"))
     }
 }
+
+export class InvestmentServiceCharge {
+    public ItemID !: Number
+    public TypeID !: Number
+    public Cost !: Number
+}
