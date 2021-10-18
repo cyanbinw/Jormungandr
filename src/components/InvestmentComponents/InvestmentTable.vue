@@ -115,18 +115,18 @@
         </el-col>
       </el-row>
       <el-row
-        v-for="(item, i) in serviceChargeList"
+        v-for="(item, i) in investmentData.serviceChargeList"
         :key="i"
         :label="item"
         :value="item"
       >
         <el-col :span="4">
           <el-select placeholder="Type">
-            <el-option> </el-option>
+            <el-option> 1 </el-option>
           </el-select>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="Name"> </el-input>
+          <el-input placeholder="Cost" v-model="item.cost"> </el-input>
         </el-col>
         <el-col :span="2">
           <el-button icon="el-icon-delete" @click="DeleteServiceCharge(i)" circle></el-button>
@@ -320,13 +320,13 @@ export default defineComponent({
     },
 
     AddServiceCharge() {
-      (this.serviceChargeList as InvestmentServiceCharge[]).push(
-        new InvestmentServiceCharge()
+      (this.investmentData.serviceChargeList as InvestmentServiceCharge[]).push(
+        new InvestmentServiceCharge(null)
       );
       this.$forceUpdate();
     },
     DeleteServiceCharge(i:number) {
-      this.serviceChargeList = this.serviceChargeList.filter((item,c) => c !== i)
+      this.investmentData.serviceChargeList = this.investmentData.serviceChargeList.filter((item,c) => c !== i)
       this.$forceUpdate();
     },
   },

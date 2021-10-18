@@ -63,7 +63,7 @@ export class InvestmentData {
     public activity!: number
     public activityName!: string
     public date!: any
-    public serviceChargeList!: InvestmentServiceCharge[]
+    public serviceChargeList: InvestmentServiceCharge[] = []
 
     constructor(){
     }
@@ -81,7 +81,7 @@ export class InvestmentData {
         this.activity = Number(data.activity)
         this.activityName = data.activityName
         this.date = new Date(moment((data.date as Date)).format("yyyy-MM-DD"))
-        this.serviceChargeList = data.ServiceChargeList
+        this.setServiceChargeList(data.serviceChargeList)
     }
 
     set(data: any): InvestmentData {
@@ -97,7 +97,7 @@ export class InvestmentData {
         this.activity = Number(data.activity)
         this.activityName = data.activityName
         this.date = moment((data.date as Date)).format("yyyy-MM-DD")
-        this.serviceChargeList = data.ServiceChargeList
+        this.setServiceChargeList(data.serviceChargeList)
         return this
     }
 
@@ -112,12 +112,28 @@ export class InvestmentData {
         this.type = Number(data.TypeID)
         this.activity = Number(data.ActivityStatus)
         this.date = new Date(moment((data.Date as Date)).format("yyyy-MM-DD"))
-        this.serviceChargeList = data.ServiceChargeList
+        this.serviceChargeList = data.ServiceChargeList ?? []
+    }
+
+    setServiceChargeList(data: any) {
+        if(!data){
+            return
+        }
+        data.forEach( c => this.serviceChargeList.push(new InvestmentServiceCharge(c)) )
     }
 }
 
 export class InvestmentServiceCharge {
-    public ItemID !: Number
-    public TypeID !: Number
-    public Cost !: Number
+    public itemID !: Number
+    public typeID !: Number
+    public cost !: Number
+
+    constructor(data: any) {
+        if(!data){
+            return
+        }
+        this.itemID = Number(data.itemID)
+        this.typeID = Number(data.typeID)
+        this.cost = Number(data.cost)
+    }
 }
