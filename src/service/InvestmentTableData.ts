@@ -1,6 +1,7 @@
 import { number } from "echarts";
 import moment from "moment"
 
+//Discard
 export default class InvestmentTableData {
     public ID: number = 0;
     public ItemID: number = 0;
@@ -14,6 +15,7 @@ export default class InvestmentTableData {
     public Date: any = 0;
     public ActivityStatus: number = 0;
     public ActivityName: string = ''
+    public ServiceChargeList: InvestmentServiceCharge[] = []
 
     constructor(data: any) {
         this.ID = data.id;
@@ -28,6 +30,7 @@ export default class InvestmentTableData {
         this.Date = moment((data.date as Date)).format("yyyy-MM-DD");
         this.ActivityStatus = data.activity;
         this.ActivityName = data.activityName;
+        this.ServiceChargeList = data.serviceChargeList;
     }
 
     add(data: any) {
@@ -43,6 +46,7 @@ export default class InvestmentTableData {
         this.Date = moment((data.date as Date)).format("yyyy-MM-DD");
         this.ActivityStatus = data.activityStatus;
         this.ActivityName = data.activityName;
+        this.ServiceChargeList = data.serviceChargeList;
     }
 }
 
@@ -55,8 +59,11 @@ export class InvestmentData {
     public share!: number
     public netWorth!: number
     public type!: number
+    public typeName!: string
     public activity!: number
-    public date!: Date
+    public activityName!: string
+    public date!: any
+    public serviceChargeList!: InvestmentServiceCharge[]
 
     constructor(){
     }
@@ -70,8 +77,28 @@ export class InvestmentData {
         this.share = Number(data.share)
         this.netWorth = Number(data.netWorth)
         this.type = Number(data.type)
+        this.typeName = data.typeName
         this.activity = Number(data.activity)
+        this.activityName = data.activityName
         this.date = new Date(moment((data.date as Date)).format("yyyy-MM-DD"))
+        this.serviceChargeList = data.ServiceChargeList
+    }
+
+    set(data: any): InvestmentData {
+        this.id = Number(data.id)
+        this.itemID = Number(data.itemID)
+        this.code = data.code
+        this.name = data.name
+        this.account = Number(data.account)
+        this.share = Number(data.share)
+        this.netWorth = Number(data.netWorth)
+        this.type = Number(data.type)
+        this.typeName = data.typeName
+        this.activity = Number(data.activity)
+        this.activityName = data.activityName
+        this.date = moment((data.date as Date)).format("yyyy-MM-DD")
+        this.serviceChargeList = data.ServiceChargeList
+        return this
     }
 
     addForInvestmentTableData(data: InvestmentTableData){
@@ -85,6 +112,7 @@ export class InvestmentData {
         this.type = Number(data.TypeID)
         this.activity = Number(data.ActivityStatus)
         this.date = new Date(moment((data.Date as Date)).format("yyyy-MM-DD"))
+        this.serviceChargeList = data.ServiceChargeList
     }
 }
 

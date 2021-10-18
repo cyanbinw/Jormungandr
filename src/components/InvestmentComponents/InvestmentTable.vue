@@ -26,17 +26,17 @@
           :height="tableHeight"
           highlight-current-row
         >
-          <el-table-column sortable prop="Code" label="Code"> </el-table-column>
-          <el-table-column sortable prop="Name" label="Name"> </el-table-column>
-          <el-table-column sortable prop="Account" label="Account">
+          <el-table-column sortable prop="code" label="Code"> </el-table-column>
+          <el-table-column sortable prop="name" label="Name"> </el-table-column>
+          <el-table-column sortable prop="account" label="Account">
           </el-table-column>
-          <el-table-column sortable prop="Share" label="Share">
+          <el-table-column sortable prop="share" label="Share">
           </el-table-column>
-          <el-table-column sortable prop="NetWorth" label="NetWorth">
+          <el-table-column sortable prop="netWorth" label="NetWorth">
           </el-table-column>
-          <el-table-column sortable prop="Date" label="Date"> </el-table-column>
-          <el-table-column prop="TypeName" label="Type"> </el-table-column>
-          <el-table-column prop="ActivityName" label="ActivityStatus">
+          <el-table-column sortable prop="date" label="Date"> </el-table-column>
+          <el-table-column prop="typeName" label="Type"> </el-table-column>
+          <el-table-column prop="activityName" label="ActivityStatus">
           </el-table-column>
           <el-table-column label="操作">
             <template #default="scope">
@@ -186,12 +186,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import api from "../../api/index";
-import InvestmentTableData, {
+import {
   InvestmentData,
   InvestmentServiceCharge,
 } from "../../service/InvestmentTableData";
 
-const tableData: InvestmentTableData[] = [];
 
 export default defineComponent({
   data() {
@@ -211,11 +210,11 @@ export default defineComponent({
   },
   setup() {},
   methods: {
-    InvestmentOpenEdit(index: number, data: InvestmentTableData) {
+    InvestmentOpenEdit(index: number, data: InvestmentData) {
       this.dataTitle = "修改";
       this.dialogFormVisible = true;
       this.investmentData = new InvestmentData();
-      this.investmentData.addForInvestmentTableData(data);
+      this.investmentData.add(data);
       this.addOrUpdate = false;
     },
     InvestmentOpenAdd() {
@@ -264,14 +263,14 @@ export default defineComponent({
     SelectName(id: number) {
       var i = this.investmentData;
       i.code = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).Code;
+        this.tableData.find((c: InvestmentData) => c.itemID == id) as any
+      ).code;
       i.name = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).Name;
+        this.tableData.find((c: InvestmentData) => c.itemID == id) as any
+      ).name;
       i.type = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).TypeID;
+        this.tableData.find((c: InvestmentData) => c.itemID == id) as any
+      ).typeID;
     },
     formatter(row, column) {
       return row.address;
@@ -291,9 +290,7 @@ export default defineComponent({
           // 指定图表的配置项和数据
           this.tableData = [];
           response.data.forEach((c) => {
-            (this.tableData as InvestmentTableData[]).push(
-              new InvestmentTableData(c)
-            );
+            (this.tableData as InvestmentData[]).push(new InvestmentData().set(c));
           });
 
           this.showTable = false;
