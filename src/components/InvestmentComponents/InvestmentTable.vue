@@ -212,9 +212,10 @@ export default defineComponent({
   methods: {
     InvestmentOpenEdit(index: number, data: InvestmentData) {
       this.dataTitle = "修改";
-      this.dialogFormVisible = true;
       this.investmentData = new InvestmentData();
       this.investmentData.add(data);
+      this.GetServiceCharge(data.id)
+      this.dialogFormVisible = true;
       this.addOrUpdate = false;
     },
     InvestmentOpenAdd() {
@@ -282,6 +283,21 @@ export default defineComponent({
     Refresh() {
       this.$forceUpdate();
     },
+    GetServiceCharge(itemID: Number) {
+      var value = { ItemID: itemID }
+      this.axios
+        .post(api.getInvestmentServiceCharge, value)
+        .then((response) => {
+          // 指定图表的配置项和数据
+          if (response.data.successful == true) {
+            this.investmentData.setServiceChargeList(response.data.data); 
+            this.$forceUpdate();
+          }         
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     GetData() {
       this.showTable = true;
       this.axios
@@ -320,8 +336,10 @@ export default defineComponent({
     },
 
     AddServiceCharge() {
+      var value = new InvestmentServiceCharge(null)
+      value.itemID = this.investmentData.id as number
       (this.investmentData.serviceChargeList as InvestmentServiceCharge[]).push(
-        new InvestmentServiceCharge(null)
+         value
       );
       this.$forceUpdate();
     },

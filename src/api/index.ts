@@ -30,6 +30,8 @@ export class WebAddress {
 
     public getInvestmentOption = this.address + '/v1/Investment/GetInvestmentOption'
 
+    public getInvestmentServiceCharge = this.address + '/v1/Investment/GetInvestmentServiceCharge'
+
 
 
     public getTarget = this.address + '/v1/Target/GetTarget'

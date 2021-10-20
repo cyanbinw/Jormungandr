@@ -121,6 +121,12 @@ export class InvestmentData {
         }
         data.forEach( c => this.serviceChargeList.push(new InvestmentServiceCharge(c)) )
     }
+
+    addServiceChargeList(data: any) {
+        data.array.forEach(c => {
+            this.serviceChargeList.push(new InvestmentServiceCharge(c))
+        });
+    }
 }
 
 export class InvestmentServiceCharge {
