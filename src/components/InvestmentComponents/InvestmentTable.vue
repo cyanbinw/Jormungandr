@@ -22,8 +22,9 @@
           v-loading="showTable"
           :data="tableData"
           style="width: 100%"
-          :default-sort="{ prop: 'Date', order: 'descending' }"
+          :default-sort="{ prop: 'date', order: 'descending' }"
           :height="tableHeight"
+          :row-class-name="tableRowClassName"
           highlight-current-row
         >
           <el-table-column sortable prop="code" label="Code"> </el-table-column>
@@ -33,6 +34,8 @@
           <el-table-column sortable prop="share" label="Share">
           </el-table-column>
           <el-table-column sortable prop="netWorth" label="NetWorth">
+          </el-table-column>
+          <el-table-column sortable prop="serviceCharge" label="ServiceCharge">
           </el-table-column>
           <el-table-column sortable prop="date" label="Date"> </el-table-column>
           <el-table-column prop="typeName" label="Type"> </el-table-column>
@@ -121,15 +124,25 @@
         :value="item"
       >
         <el-col :span="4">
-          <el-select placeholder="Type">
-            <el-option> 1 </el-option>
+          <el-select placeholder="Type" v-model="item.typeID">
+            <el-option
+              v-for="c in serviceChargeList"
+              :key="c.TypeID"
+              :label="c.TypeName"
+              :value="c.TypeID"
+            >
+            </el-option>
           </el-select>
         </el-col>
         <el-col :span="6">
           <el-input placeholder="Cost" v-model="item.cost"> </el-input>
         </el-col>
         <el-col :span="2">
-          <el-button icon="el-icon-delete" @click="DeleteServiceCharge(i)" circle></el-button>
+          <el-button
+            icon="el-icon-delete"
+            @click="DeleteServiceCharge(i)"
+            circle
+          ></el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -191,13 +204,13 @@ import {
   InvestmentServiceCharge,
 } from "../../service/InvestmentTableData";
 
-
 export default defineComponent({
   data() {
     return {
       tableData: [],
       typeList: [],
       activityList: [],
+      serviceChargeList: [],
       investmentData: new InvestmentData(),
       dialogFormVisible: false,
       dataTitle: "",
@@ -205,7 +218,6 @@ export default defineComponent({
       showTable: true,
       itemList: [] as [],
       tableHeight: 0,
-      serviceChargeList: [],
     };
   },
   setup() {},
@@ -214,7 +226,7 @@ export default defineComponent({
       this.dataTitle = "修改";
       this.investmentData = new InvestmentData();
       this.investmentData.add(data);
-      this.GetServiceCharge(data.id)
+      this.GetServiceCharge(data.id);
       this.dialogFormVisible = true;
       this.addOrUpdate = false;
     },
@@ -284,15 +296,15 @@ export default defineComponent({
       this.$forceUpdate();
     },
     GetServiceCharge(itemID: Number) {
-      var value = { ItemID: itemID }
+      var value = { ItemID: itemID };
       this.axios
         .post(api.getInvestmentServiceCharge, value)
         .then((response) => {
           // 指定图表的配置项和数据
           if (response.data.successful == true) {
-            this.investmentData.setServiceChargeList(response.data.data); 
+            this.investmentData.setServiceChargeList(response.data.data);
             this.$forceUpdate();
-          }         
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -306,7 +318,9 @@ export default defineComponent({
           // 指定图表的配置项和数据
           this.tableData = [];
           response.data.forEach((c) => {
-            (this.tableData as InvestmentData[]).push(new InvestmentData().set(c));
+            (this.tableData as InvestmentData[]).push(
+              new InvestmentData().set(c)
+            );
           });
 
           this.showTable = false;
@@ -326,9 +340,11 @@ export default defineComponent({
           this.typeList = [];
           this.activityList = [];
           this.itemList = [];
+          this.serviceChargeList = [];
           this.typeList = response.data.type;
           this.activityList = response.data.activity;
           this.itemList = response.data.item;
+          this.serviceChargeList = response.data.serviceCharge;
         })
         .catch((error) => {
           console.log(error);
@@ -336,16 +352,27 @@ export default defineComponent({
     },
 
     AddServiceCharge() {
-      var value = new InvestmentServiceCharge(null)
-      value.itemID = this.investmentData.id as number
+      var value = new InvestmentServiceCharge(null);
+      value.itemID = this.investmentData.id as number;
       (this.investmentData.serviceChargeList as InvestmentServiceCharge[]).push(
-         value
+        value
       );
       this.$forceUpdate();
     },
-    DeleteServiceCharge(i:number) {
-      this.investmentData.serviceChargeList = this.investmentData.serviceChargeList.filter((item,c) => c !== i)
+    DeleteServiceCharge(i: number) {
+      this.investmentData.serviceChargeList =
+        this.investmentData.serviceChargeList.filter((item, c) => c !== i);
       this.$forceUpdate();
+    },
+    tableRowClassName({ row, rowIndex }) {
+      if (row.activity === 1) {
+        return "buy-row";
+      } else if (row.activity === 2) {
+        return "sell-row";
+      } else if (row.activity === 4) {
+        return "empty-row";
+      }
+      return "";
     },
   },
   mounted() {
@@ -360,4 +387,16 @@ export default defineComponent({
 .el-row {
   margin-bottom: 20px;
 }
+
+  .el-table .buy-row {
+    background: #fdb35e;
+  }
+
+  .el-table .sell-row {
+    background: #5efd9b;
+  }
+
+  .el-table .empty-row {
+    background: #71fd5e;
+  }
 </style>
