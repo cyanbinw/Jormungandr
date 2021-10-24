@@ -29,6 +29,24 @@
           >设置Investment Item</el-button
         >
       </el-col>
+      <el-col :span="3">
+        <el-button
+          type="primary"
+          :loading="investmentTypeWorkLoading"
+          @click="investmentTypeWork()"
+          round
+          >设置Investment Type</el-button
+        >
+      </el-col>
+      <el-col :span="3">
+        <el-button
+          type="primary"
+          :loading="investmentServiceChargeWorkLoading"
+          @click="investmentServiceChargeWork()"
+          round
+          >设置Investment Service Charge</el-button
+        >
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span="3">
@@ -66,6 +84,8 @@ export default defineComponent({
       allService: true,
       allWorkLoading: false,
       investmentItemWorkLoading: false,
+      investmentTypeWorkLoading: false,
+      investmentServiceChargeWorkLoading: false,
       billWorkLoading: false,
       userWorkloading: false,
     };
@@ -116,20 +136,58 @@ export default defineComponent({
         });
     },
     investmentItemWork() {
-      this.userWorkloading = true;
+      this.investmentItemWorkLoading = true;
       this.axios
         .post(api.setInvestmentItemWork)
         .then((response) => {
-          this.userWorkloading = false;
+          this.investmentItemWorkLoading = false;
           ElNotification({
             title: "InvestmentItem更新成功",
             message: h("i", { style: "color: teal" }, "已完成InvestmentItem更新"),
           });
         })
         .catch((error) => {
-          this.userWorkloading = false;
+          this.investmentItemWorkLoading = false;
           ElNotification({
             title: "InvestmentItem更新失败",
+            message: h("i", { style: "color: red" }, error),
+          });
+        });
+    },
+    investmentTypeWork() {
+      this.investmentTypeWorkLoading = true;
+      this.axios
+        .post(api.setInvestmentTypeWork)
+        .then((response) => {
+          this.investmentTypeWorkLoading = false;
+          ElNotification({
+            title: "InvestmentItem更新成功",
+            message: h("i", { style: "color: teal" }, "已完成InvestmentType更新"),
+          });
+        })
+        .catch((error) => {
+          this.investmentTypeWorkLoading = false;
+          ElNotification({
+            title: "InvestmentType更新失败",
+            message: h("i", { style: "color: red" }, error),
+          });
+        });
+    },
+    investmentServiceChargeWork() {
+      this.investmentServiceChargeWorkLoading = true;
+      this.axios
+        .post(api.setInvestmentServiceChargeWork)
+        .then((response) => {
+          this.investmentServiceChargeWorkLoading = false;
+          ElNotification({
+            title: "InvestmentItem更新成功",
+            message: h("i", { style: "color: teal" }, "已完成InvestmentType更新"),
+          });
+        })
+        .catch((error) => {
+          this.investmentServiceChargeWorkLoading = false;
+          ElNotification({
+            title: "InvestmentType更新失败",
             message: h("i", { style: "color: red" }, error),
           });
         });

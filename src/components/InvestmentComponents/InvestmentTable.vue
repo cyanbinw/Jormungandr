@@ -22,21 +22,24 @@
           v-loading="showTable"
           :data="tableData"
           style="width: 100%"
-          :default-sort="{ prop: 'Date', order: 'descending' }"
+          :default-sort="{ prop: 'date', order: 'descending' }"
           :height="tableHeight"
+          :row-class-name="tableRowClassName"
           highlight-current-row
         >
-          <el-table-column sortable prop="Code" label="Code"> </el-table-column>
-          <el-table-column sortable prop="Name" label="Name"> </el-table-column>
-          <el-table-column sortable prop="Account" label="Account">
+          <el-table-column sortable prop="code" label="Code"> </el-table-column>
+          <el-table-column sortable prop="name" label="Name"> </el-table-column>
+          <el-table-column sortable prop="account" label="Account">
           </el-table-column>
-          <el-table-column sortable prop="Share" label="Share">
+          <el-table-column sortable prop="share" label="Share">
           </el-table-column>
-          <el-table-column sortable prop="NetWorth" label="NetWorth">
+          <el-table-column sortable prop="netWorth" label="NetWorth">
           </el-table-column>
-          <el-table-column sortable prop="Date" label="Date"> </el-table-column>
-          <el-table-column prop="TypeName" label="Type"> </el-table-column>
-          <el-table-column prop="ActivityName" label="ActivityStatus">
+          <el-table-column sortable prop="serviceCharge" label="ServiceCharge">
+          </el-table-column>
+          <el-table-column sortable prop="date" label="Date"> </el-table-column>
+          <el-table-column prop="typeName" label="Type"> </el-table-column>
+          <el-table-column prop="activityName" label="ActivityStatus">
           </el-table-column>
           <el-table-column label="操作">
             <template #default="scope">
@@ -110,6 +113,39 @@
         </el-col>
       </el-row>
       <el-row>
+        <el-col :span="4">
+          <el-button type="primary" @click="AddServiceCharge()">添加</el-button>
+        </el-col>
+      </el-row>
+      <el-row
+        v-for="(item, i) in investmentData.serviceChargeList"
+        :key="i"
+        :label="item"
+        :value="item"
+      >
+        <el-col :span="4">
+          <el-select placeholder="Type" v-model="item.typeID">
+            <el-option
+              v-for="c in serviceChargeList"
+              :key="c.TypeID"
+              :label="c.TypeName"
+              :value="c.TypeID"
+            >
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6">
+          <el-input placeholder="Cost" v-model="item.cost"> </el-input>
+        </el-col>
+        <el-col :span="2">
+          <el-button
+            icon="el-icon-delete"
+            @click="DeleteServiceCharge(i)"
+            circle
+          ></el-button>
+        </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-select v-model="investmentData.type" placeholder="Type">
             <el-option
@@ -163,11 +199,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import api from "../../api/index";
-import InvestmentTableData, {
+import {
   InvestmentData,
+  InvestmentServiceCharge,
 } from "../../service/InvestmentTableData";
-
-const tableData: InvestmentTableData[] = [];
 
 export default defineComponent({
   data() {
@@ -175,6 +210,7 @@ export default defineComponent({
       tableData: [],
       typeList: [],
       activityList: [],
+      serviceChargeList: [],
       investmentData: new InvestmentData(),
       dialogFormVisible: false,
       dataTitle: "",
@@ -186,11 +222,12 @@ export default defineComponent({
   },
   setup() {},
   methods: {
-    InvestmentOpenEdit(index: number, data: InvestmentTableData) {
+    InvestmentOpenEdit(index: number, data: InvestmentData) {
       this.dataTitle = "修改";
-      this.dialogFormVisible = true;
       this.investmentData = new InvestmentData();
-      this.investmentData.addForInvestmentTableData(data);
+      this.investmentData.add(data);
+      this.GetServiceCharge(data.id);
+      this.dialogFormVisible = true;
       this.addOrUpdate = false;
     },
     InvestmentOpenAdd() {
@@ -239,14 +276,14 @@ export default defineComponent({
     SelectName(id: number) {
       var i = this.investmentData;
       i.code = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).Code;
+        this.tableData.find((c: InvestmentData) => c.itemID == id) as any
+      ).code;
       i.name = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).Name;
+        this.tableData.find((c: InvestmentData) => c.itemID == id) as any
+      ).name;
       i.type = (
-        this.tableData.find((c: InvestmentTableData) => c.ItemID == id) as any
-      ).TypeID;
+        this.tableData.find((c: InvestmentData) => c.itemID == id) as any
+      ).typeID;
     },
     formatter(row, column) {
       return row.address;
@@ -258,6 +295,21 @@ export default defineComponent({
     Refresh() {
       this.$forceUpdate();
     },
+    GetServiceCharge(itemID: Number) {
+      var value = { ItemID: itemID };
+      this.axios
+        .post(api.getInvestmentServiceCharge, value)
+        .then((response) => {
+          // 指定图表的配置项和数据
+          if (response.data.successful == true) {
+            this.investmentData.setServiceChargeList(response.data.data);
+            this.$forceUpdate();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     GetData() {
       this.showTable = true;
       this.axios
@@ -266,8 +318,8 @@ export default defineComponent({
           // 指定图表的配置项和数据
           this.tableData = [];
           response.data.forEach((c) => {
-            (this.tableData as InvestmentTableData[]).push(
-              new InvestmentTableData(c)
+            (this.tableData as InvestmentData[]).push(
+              new InvestmentData().set(c)
             );
           });
 
@@ -288,13 +340,39 @@ export default defineComponent({
           this.typeList = [];
           this.activityList = [];
           this.itemList = [];
+          this.serviceChargeList = [];
           this.typeList = response.data.type;
           this.activityList = response.data.activity;
           this.itemList = response.data.item;
+          this.serviceChargeList = response.data.serviceCharge;
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+
+    AddServiceCharge() {
+      var value = new InvestmentServiceCharge(null);
+      value.itemID = this.investmentData.id as number;
+      (this.investmentData.serviceChargeList as InvestmentServiceCharge[]).push(
+        value
+      );
+      this.$forceUpdate();
+    },
+    DeleteServiceCharge(i: number) {
+      this.investmentData.serviceChargeList =
+        this.investmentData.serviceChargeList.filter((item, c) => c !== i);
+      this.$forceUpdate();
+    },
+    tableRowClassName({ row, rowIndex }) {
+      if (row.activity === 1) {
+        return "buy-row";
+      } else if (row.activity === 2) {
+        return "sell-row";
+      } else if (row.activity === 4) {
+        return "empty-row";
+      }
+      return "";
     },
   },
   mounted() {
@@ -309,4 +387,16 @@ export default defineComponent({
 .el-row {
   margin-bottom: 20px;
 }
+
+  .el-table .buy-row {
+    background: #fdb35e;
+  }
+
+  .el-table .sell-row {
+    background: #5efd9b;
+  }
+
+  .el-table .empty-row {
+    background: #71fd5e;
+  }
 </style>
