@@ -70,6 +70,7 @@ export class InvestmentData {
     public serviceChargeList: InvestmentServiceCharge[] = []
 
     constructor(){
+        
     }
 
     add(data: any){

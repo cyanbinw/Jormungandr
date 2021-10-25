@@ -112,6 +112,7 @@
           </el-input>
         </el-col>
       </el-row>
+      <el-divider content-position="left">Additional Cost</el-divider>
       <el-row>
         <el-col :span="4">
           <el-button type="primary" @click="AddServiceCharge()">添加</el-button>
@@ -145,6 +146,7 @@
           ></el-button>
         </el-col>
       </el-row>
+      <el-divider content-position="left">Additional Cost</el-divider>
       <el-row>
         <el-col :span="12">
           <el-select v-model="investmentData.type" placeholder="Type">
@@ -354,6 +356,7 @@ export default defineComponent({
     AddServiceCharge() {
       var value = new InvestmentServiceCharge(null);
       value.itemID = this.investmentData.id as number;
+      value.typeID = this.investmentData.serviceChargeList.length + 1;
       (this.investmentData.serviceChargeList as InvestmentServiceCharge[]).push(
         value
       );
