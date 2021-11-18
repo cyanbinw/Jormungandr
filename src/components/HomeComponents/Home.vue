@@ -1,9 +1,13 @@
 <template>
+  <el-divider content-position="left">Investment Pie Chart</el-divider>
   <el-row>
     <el-col :span="24">
       <InvestmentPieChart :item="InvestmentValue" />
       <!-- <InvestmentHistogram :item="InvestmentValue" /> -->
     </el-col>
+  </el-row>
+  <el-divider content-position="left">Bill Line Chart</el-divider>
+  <el-row>
     <el-col :span="24">
       <BillLineChart
         v-for="(item, index) in BillValue"
@@ -95,5 +99,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
+
+.el-divider__text{
+  background-color: #51264b;
+  color: #e0c4dd
+}
+
 </style>

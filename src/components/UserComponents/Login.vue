@@ -1,12 +1,12 @@
 <template>
-  <el-row>
-    <el-col :span="4">
+  <el-row style="margin-top: 400px;">
+    <el-col :span="4" :offset="9">
       <el-input placeholder="User Name" v-model="userName" clearable>
       </el-input>
     </el-col>
   </el-row>
   <el-row>
-    <el-col :span="4">
+    <el-col :span="4" :offset="9">
       <el-input
         placeholder="Password"
         v-model="password"
@@ -15,12 +15,12 @@
     </el-col>
   </el-row>
   <el-row>
-    <el-col :span="4">
+    <el-col :span="4" :offset="9">
       <el-checkbox v-model="remember">记住我</el-checkbox>
     </el-col>
   </el-row>
   <el-row>
-    <el-col :span="4">
+    <el-col :span="4" :offset="9">
       <el-button type="primary" @loading="loading" @click="login()"
         >登陆</el-button
       >

@@ -113,11 +113,27 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="4">
-          <el-button type="primary" @click="AddServiceCharge()">添加</el-button>
+        <el-col :span="12">
+          <el-select
+            v-model="investmentData.type"
+            @change="changeType()"
+            placeholder="Type"
+          >
+            <el-option
+              v-for="item in typeList"
+              :key="item.TypeID"
+              :label="item.TypeName"
+              :value="item.TypeID"
+            >
+            </el-option>
+          </el-select>
         </el-col>
       </el-row>
+      <el-divider v-if="showCost" content-position="left"
+        >Additional Cost</el-divider
+      >
       <el-row
+        :if="showCost"
         v-for="(item, i) in investmentData.serviceChargeList"
         :key="i"
         :label="item"
@@ -145,19 +161,9 @@
           ></el-button>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-select v-model="investmentData.type" placeholder="Type">
-            <el-option
-              v-for="item in typeList"
-              :key="item.TypeID"
-              :label="item.TypeName"
-              :value="item.TypeID"
-            >
-            </el-option>
-          </el-select>
-        </el-col>
-      </el-row>
+      <el-divider v-if="showCost" content-position="left"
+        >Additional Cost</el-divider
+      >
       <el-row>
         <el-col :span="12">
           <el-select v-model="investmentData.activity" placeholder="Activity">
@@ -218,6 +224,7 @@ export default defineComponent({
       showTable: true,
       itemList: [] as [],
       tableHeight: 0,
+      showCost: false,
     };
   },
   setup() {},
@@ -354,6 +361,7 @@ export default defineComponent({
     AddServiceCharge() {
       var value = new InvestmentServiceCharge(null);
       value.itemID = this.investmentData.id as number;
+      value.typeID = this.investmentData.serviceChargeList.length + 1;
       (this.investmentData.serviceChargeList as InvestmentServiceCharge[]).push(
         value
       );
@@ -374,6 +382,29 @@ export default defineComponent({
       }
       return "";
     },
+    changeType() {
+      this.investmentData.serviceChargeList = [];
+      if (this.investmentData.type == 2) {
+        for(var i = 0; i < 3; i++){
+          var value = new InvestmentServiceCharge(null);
+          value.itemID = this.investmentData.id as number;
+          value.typeID = this.investmentData.serviceChargeList.length + 1;
+          (
+            this.investmentData.serviceChargeList as InvestmentServiceCharge[]
+          ).push(value);
+        }
+      } else if (this.investmentData.type != 3){
+          var value = new InvestmentServiceCharge(null);
+          value.itemID = this.investmentData.id as number;
+          value.typeID = this.investmentData.serviceChargeList.length + 1;
+          (
+            this.investmentData.serviceChargeList as InvestmentServiceCharge[]
+          ).push(value);
+      }
+
+      this.showCost = this.investmentData.type != 3;
+      this.$forceUpdate();
+    },
   },
   mounted() {
     this.GetData();
@@ -388,15 +419,15 @@ export default defineComponent({
   margin-bottom: 20px;
 }
 
-  .el-table .buy-row {
-    background: #fdb35e;
-  }
+.el-table .buy-row {
+  background: #fdb35e;
+}
 
-  .el-table .sell-row {
-    background: #5efd9b;
-  }
+.el-table .sell-row {
+  background: #5efd9b;
+}
 
-  .el-table .empty-row {
-    background: #71fd5e;
-  }
+.el-table .empty-row {
+  background: #71fd5e;
+}
 </style>
