@@ -1,5 +1,5 @@
 import axios from 'axios'
-import ElementPlus, { ElButton, ElMessageBox, ElInfiniteScroll, ElLoading, ElMessage, ElNotification } from 'element-plus'
+import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import { createApp } from 'vue'
 import VueAxios from 'vue-axios'

@@ -13,6 +13,9 @@
           <el-menu-item index="2-1" @click="goToInvestmentTable()"
             >投资表</el-menu-item
           >
+          <el-menu-item index="2-2" @click="goToInvestmentReportForm()"
+            >报表</el-menu-item
+          >
           <!-- <el-menu-item index="2-1-2" @click="goToInvestmentDiagram()">投资资金曲线图</el-menu-item>
             <el-menu-item index="2-1-3" @click="goToTarget()">愿望</el-menu-item> -->
         </el-submenu>
@@ -87,6 +90,11 @@ export default defineComponent({
     goToInvestmentDiagram() {
       router.push({
         path: "/Investment/" + this.id + "/InvestmentDiagram",
+      });
+    },
+    goToInvestmentReportForm() {
+      router.push({
+        path: "/Investment/" + this.id + "/InvestmentReportForm",
       });
     },
     goToTarget() {

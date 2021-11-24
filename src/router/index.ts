@@ -4,6 +4,7 @@ import Home from '../components/HomeComponents/Home.vue'
 import Investment from '../components/InvestmentComponents/Investment.vue'
 import InvestmentDiagram from '../components/InvestmentComponents/InvestmentDiagram.vue'
 import InvestmentTable from '../components/InvestmentComponents/InvestmentTable.vue'
+import InvestmentReportForm from '../components/InvestmentComponents/InvestmentReportForm.vue'
 import Target from '../components/TargetComponents/Target.vue'
 import TargetData from '../components/TargetComponents/TargetData.vue'
 import BudgetExpenditure from '../components/BillComponents/BudgetExpenditure.vue'
@@ -36,6 +37,7 @@ const routes = [
     children: [
       { path: 'InvestmentDiagram', component: InvestmentDiagram },
       { path: 'InvestmentTable', component: InvestmentTable },
+      { path: 'InvestmentReportForm', component: InvestmentReportForm },
     ]
   },
 
