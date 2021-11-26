@@ -54,9 +54,9 @@ export default class InvestmentTableData {
 }
 
 export class InvestmentData {
-    public id!:number
-    public itemID!:number
-    public code!:string
+    public id!: number
+    public itemID!: number
+    public code!: string
     public name!: string
     public account!: number
     public share!: number
@@ -69,11 +69,11 @@ export class InvestmentData {
     public date!: any
     public serviceChargeList: InvestmentServiceCharge[] = []
 
-    constructor(){
-        
+    constructor() {
+
     }
 
-    add(data: any){
+    add(data: any) {
         this.id = Number(data.id)
         this.itemID = Number(data.itemID)
         this.code = data.code
@@ -108,7 +108,7 @@ export class InvestmentData {
         return this
     }
 
-    addForInvestmentTableData(data: InvestmentTableData){
+    addForInvestmentTableData(data: InvestmentTableData) {
         this.id = Number(data.ID)
         this.itemID = Number(data.ItemID)
         this.code = data.Code
@@ -124,10 +124,10 @@ export class InvestmentData {
     }
 
     setServiceChargeList(data: any) {
-        if(!data){
+        if (!data) {
             return
         }
-        data.forEach( c => this.serviceChargeList.push(new InvestmentServiceCharge(c)) )
+        data.forEach(c => this.serviceChargeList.push(new InvestmentServiceCharge(c)))
     }
 
     addServiceChargeList(data: any) {
@@ -143,11 +143,32 @@ export class InvestmentServiceCharge {
     public cost !: Number
 
     constructor(data: any) {
-        if(!data){
+        if (!data) {
             return
         }
         this.itemID = Number(data.itemID)
         this.typeID = Number(data.typeID)
         this.cost = Number(data.cost)
     }
+}
+
+export class InvestmentReportForm {
+    public position                 !: Number     //持仓
+    public positionInvestment       !: Number //持仓投资
+    public totalPositionInvestment  !: Number //持仓总投资
+    public positionSell             !: Number //持仓卖出
+    public positionServiceCharge    !: Number // 持仓手续费
+    public positionInformation      !: string  // 持仓信息
+    public clearance                !: Number     //清仓
+    public clearanceInvestment      !: Number //清仓投资
+    public totalClearanceInvestment !: Number //清仓总投资
+    public clearanceSell            !: Number //清仓卖出
+    public clearanceServiceCharge   !: Number // 清仓手续费
+    public clearanceInformation     !: string  // 清仓信息
+    public total                    !: Number     //总体
+    public totalInvestment          !: Number //总体投资
+    public totalTotalInvestment     !: Number //总体总投资
+    public totalSell                !: Number //总体卖出
+    public totalServiceCharge       !: Number // 总体手续费
+    public totalInformation         !: string  // 总体信息
 }
