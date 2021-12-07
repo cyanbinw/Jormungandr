@@ -6,7 +6,7 @@
 import { defineComponent, ref } from "vue";
 import InvestmentModel from "../../../service/InvestmentModel";
 
-export default {
+export default defineComponent ({
   name: "InvestmentPieChart",
   props: ["item"],
   data() {
@@ -25,7 +25,7 @@ export default {
         i.showInvestmentHistogram(this.value)
       }
   }
-};
+});
 </script>
 
 <style>
