@@ -1,6 +1,6 @@
 import axios from 'axios'
 import ElementPlus from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
+import 'element-plus/dist/index.css'
 import { createApp } from 'vue'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
