@@ -8,7 +8,7 @@
         background-color="#000000"
       >
         <el-menu-item index="1" @click="goToHome()">JORMUNGANDR</el-menu-item>
-        <el-submenu index="2">
+        <el-sub-menu index="2">
           <template #title>投资</template>
           <el-menu-item index="2-1" @click="goToInvestmentTable()"
             >投资表</el-menu-item
@@ -18,8 +18,8 @@
           >
           <!-- <el-menu-item index="2-1-2" @click="goToInvestmentDiagram()">投资资金曲线图</el-menu-item>
             <el-menu-item index="2-1-3" @click="goToTarget()">愿望</el-menu-item> -->
-        </el-submenu>
-        <el-submenu index="3">
+        </el-sub-menu>
+        <el-sub-menu index="3">
           <template #title>账本</template>
           <el-menu-item index="3-1" @click="goToBudgetExpenditure()"
             >预算与开支</el-menu-item
@@ -35,23 +35,23 @@
           >
           <!-- <el-menu-item index="3-1-4">每月简报</el-menu-item> -->
           <!-- <el-menu-item index="2-3" @click="goToDesireTable()">愿望</el-menu-item>
-          <el-submenu index="2-4">
+          <el-sub-menu index="2-4">
             <template #title>选项4</template>
             <el-menu-item index="2-4-1">选项1</el-menu-item>
             <el-menu-item index="2-4-2">选项2</el-menu-item>
             <el-menu-item index="2-4-3">选项3</el-menu-item>
-          </el-submenu> -->
-        </el-submenu>
-        <el-submenu index="4">
+          </el-sub-menu> -->
+        </el-sub-menu>
+        <el-sub-menu index="4">
           <template #title>工作台</template>
           <el-menu-item index="4-1" @click="goToWork()">工作</el-menu-item>
-          <el-submenu index="4-2">
+          <el-sub-menu index="4-2">
             <template #title>设置</template>
             <el-menu-item index="4-2-1" @click="goToBillSet()"
               >账本设置</el-menu-item
             >
-          </el-submenu>
-        </el-submenu>
+          </el-sub-menu>
+        </el-sub-menu>
         <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item>
         <el-menu-item index="4"
           ><a href="#" target="_blank">内容管理</a></el-menu-item
